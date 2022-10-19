@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   
   
-  <title>NickBlog</title>
+  <title>查看动态 | NickBlog</title>
   <meta name="author" content="lyanc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -16,11 +16,15 @@
   
     <meta name="keywords" content="" />
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="NickBlog">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="Dictionary接口继承及规范函数12345678910 Dictionary&lt;TKey,TValue&gt;:IDictionary&lt;TKey,TValue&gt;, IDictionary, IReadOnlyDictionary&lt;TKey, TValue&gt;, ISerializable, IDeserializationCallback IDictionary:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="查看动态">
+<meta property="og:url" content="http://example.com/2022/10/19/C#%E9%9B%86%E5%90%88/index.html">
 <meta property="og:site_name" content="NickBlog">
+<meta property="og:description" content="Dictionary接口继承及规范函数12345678910 Dictionary&lt;TKey,TValue&gt;:IDictionary&lt;TKey,TValue&gt;, IDictionary, IReadOnlyDictionary&lt;TKey, TValue&gt;, ISerializable, IDeserializationCallback IDictionary:">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-19T07:57:46.962Z">
+<meta property="article:modified_time" content="2022-10-17T18:59:41.318Z">
 <meta property="article:author" content="lyanc">
 <meta name="twitter:card" content="summary">
   
@@ -144,8 +148,6 @@
 <section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
     <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
     
-        <div class="sticky-area">
-    
     
                 <aside id="krw-about" class="widget widget-kratos-about clearfix">
     <div class="photo-background"></div>
@@ -185,6 +187,8 @@
     </div>
 </aside>
             
+                    <div class="sticky-area">
+                
                 
 
             
@@ -215,22 +219,35 @@
 
         
 
-            <!-- Breadcrumb for tag & category page -->
-
-
-
-
+            <article itemscope itemtype="https://schema.org/Article">
     
-    
-        <article class="kratos-hentry kratos-entry-border-new clearfix" itemscope itemtype="https://schema.org/Article">
-            <div class="kratos-status">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/19/C#%E9%9B%86%E5%90%88/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2022-10-19T07:57:46.962Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-10-19</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">lyanc</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~9.51K
+                    
+                    字
+                </li>
                 
-                    <i class="fa fa-refresh"></i>
-                
-                <div class="kratos-status-inner">
-                    <div class="kratos-status-content" itemprop="articleBody">
-                        
-                            <h1 id="Dictionary"><a href="#Dictionary" class="headerlink" title="Dictionary"></a>Dictionary</h1><h2 id="接口继承及规范函数"><a href="#接口继承及规范函数" class="headerlink" title="接口继承及规范函数"></a>接口继承及规范函数</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> Dictionary&lt;TKey,TValue&gt;:</span><br><span class="line">IDictionary&lt;TKey,TValue&gt;, </span><br><span class="line">IDictionary, </span><br><span class="line">IReadOnlyDictionary&lt;TKey, TValue&gt;, </span><br><span class="line">ISerializable, </span><br><span class="line">IDeserializationCallback </span><br><span class="line"></span><br><span class="line">IDictionary: ICollection</span><br><span class="line">ICollection: IEnumerable</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="Dictionary"><a href="#Dictionary" class="headerlink" title="Dictionary"></a>Dictionary</h1><h2 id="接口继承及规范函数"><a href="#接口继承及规范函数" class="headerlink" title="接口继承及规范函数"></a>接口继承及规范函数</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> Dictionary&lt;TKey,TValue&gt;:</span><br><span class="line">IDictionary&lt;TKey,TValue&gt;, </span><br><span class="line">IDictionary, </span><br><span class="line">IReadOnlyDictionary&lt;TKey, TValue&gt;, </span><br><span class="line">ISerializable, </span><br><span class="line">IDeserializationCallback </span><br><span class="line"></span><br><span class="line">IDictionary: ICollection</span><br><span class="line">ICollection: IEnumerable</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IDictionary</span>&lt;<span class="title">TKey</span>, <span class="title">TValue</span>&gt; : <span class="title">ICollection</span>&lt;<span class="title">KeyValuePair</span>&lt;<span class="title">TKey</span>, <span class="title">TValue</span>&gt;&gt;</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="comment">// Interfaces are not serializable</span></span><br><span class="line">       <span class="comment">// The Item property provides methods to read and edit entries </span></span><br><span class="line">       <span class="comment">// in the Dictionary.</span></span><br><span class="line">       TValue <span class="keyword">this</span>[TKey key] &#123;</span><br><span class="line">           <span class="keyword">get</span>;</span><br><span class="line">           <span class="keyword">set</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   </span><br><span class="line">       <span class="comment">// Returns a collections of the keys in this dictionary.</span></span><br><span class="line">       ICollection&lt;TKey&gt; Keys &#123;</span><br><span class="line">           <span class="keyword">get</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   </span><br><span class="line">       <span class="comment">// Returns a collections of the values in this dictionary.</span></span><br><span class="line">       ICollection&lt;TValue&gt; Values &#123;</span><br><span class="line">           <span class="keyword">get</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   </span><br><span class="line">       <span class="comment">// Returns whether this dictionary contains a particular key.</span></span><br><span class="line">       <span class="comment">//</span></span><br><span class="line">       <span class="function"><span class="built_in">bool</span> <span class="title">ContainsKey</span>(<span class="params">TKey key</span>)</span>;</span><br><span class="line">   </span><br><span class="line">       <span class="comment">// Adds a key-value pair to the dictionary.</span></span><br><span class="line">       <span class="comment">// </span></span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">Add</span>(<span class="params">TKey key, TValue <span class="keyword">value</span></span>)</span>;</span><br><span class="line">   </span><br><span class="line">       <span class="comment">// Removes a particular key from the dictionary.</span></span><br><span class="line">       <span class="comment">//</span></span><br><span class="line">       <span class="function"><span class="built_in">bool</span> <span class="title">Remove</span>(<span class="params">TKey key</span>)</span>;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="built_in">bool</span> <span class="title">TryGetValue</span>(<span class="params">TKey key, <span class="keyword">out</span> TValue <span class="keyword">value</span></span>)</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICollection</span>&lt;<span class="title">T</span>&gt; : <span class="title">IEnumerable</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="comment">// Number of items in the collections.        </span></span><br><span class="line">       <span class="built_in">int</span> Count &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line"></span><br><span class="line">       <span class="built_in">bool</span> IsReadOnly &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">Add</span>(<span class="params">T item</span>)</span>;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">Clear</span>()</span>;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="built_in">bool</span> <span class="title">Contains</span>(<span class="params">T item</span>)</span>; </span><br><span class="line">               </span><br><span class="line">       <span class="comment">// CopyTo copies a collection into an Array, starting at a particular</span></span><br><span class="line">       <span class="comment">// index into the array.</span></span><br><span class="line">       <span class="comment">// </span></span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">CopyTo</span>(<span class="params">T[] array, <span class="built_in">int</span> arrayIndex</span>)</span>;</span><br><span class="line">               </span><br><span class="line">       <span class="comment">//void CopyTo(int sourceIndex, T[] destinationArray, int destinationIndex, int count);</span></span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="built_in">bool</span> <span class="title">Remove</span>(<span class="params">T item</span>)</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IEnumerable</span></span><br><span class="line">   &#123;</span><br><span class="line">       <span class="comment">// Interfaces are not serializable</span></span><br><span class="line">       <span class="comment">// Returns an IEnumerator for this enumerable Object.  The enumerator provides</span></span><br><span class="line">       <span class="comment">// a simple way to access all the contents of a collection.</span></span><br><span class="line">       [<span class="meta">Pure</span>]</span><br><span class="line">       [<span class="meta">DispId(-4)</span>]</span><br><span class="line">       <span class="function">IEnumerator <span class="title">GetEnumerator</span>()</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -268,49 +285,103 @@
 <p>5.当entries长度和count相同时进行的扩容</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (count == entries.Length)</span><br><span class="line">               &#123;</span><br><span class="line">                   Resize();</span><br><span class="line">                   targetBucket = hashCode % buckets.Length;</span><br><span class="line">               &#125;</span><br><span class="line">               </span><br><span class="line">               </span><br><span class="line">     System.<span class="function">Collections          </span></span><br><span class="line"><span class="function"> <span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Resize</span>(<span class="params"><span class="built_in">int</span> newSize, <span class="built_in">bool</span> forceNewHashCodes</span>)</span> &#123;</span><br><span class="line">           Contract.Assert(newSize &gt;= entries.Length);</span><br><span class="line">           <span class="built_in">int</span>[] newBuckets = <span class="keyword">new</span> <span class="built_in">int</span>[newSize];</span><br><span class="line">           <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; newBuckets.Length; i++) newBuckets[i] = <span class="number">-1</span>;</span><br><span class="line">           Entry[] newEntries = <span class="keyword">new</span> Entry[newSize];</span><br><span class="line">           Array.Copy(entries, <span class="number">0</span>, newEntries, <span class="number">0</span>, count);</span><br><span class="line">           <span class="keyword">if</span>(forceNewHashCodes) &#123;</span><br><span class="line">               <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">                   <span class="keyword">if</span>(newEntries[i].hashCode != <span class="number">-1</span>) &#123;</span><br><span class="line">                       newEntries[i].hashCode = (comparer.GetHashCode(newEntries[i].key) &amp; <span class="number">0x7FFFFFFF</span>);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">               <span class="keyword">if</span> (newEntries[i].hashCode &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                   <span class="built_in">int</span> bucket = newEntries[i].hashCode % newSize;</span><br><span class="line">                   newEntries[i].next = newBuckets[bucket];</span><br><span class="line">                   newBuckets[bucket] = i;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           buckets = newBuckets;</span><br><span class="line">           entries = newEntries;</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">         <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Hashtable</span> : <span class="title">IDictionary</span>, <span class="title">ISerializable</span>, <span class="title">IDeserializationCallback</span>, <span class="title">ICloneable</span></span><br><span class="line">         &#123;</span><br><span class="line">       </span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> <span class="title">ExpandPrime</span>(<span class="params"><span class="built_in">int</span> oldSize</span>)</span></span><br><span class="line">       &#123;</span><br><span class="line">           <span class="built_in">int</span> newSize = <span class="number">2</span> * oldSize;</span><br><span class="line"></span><br><span class="line">           <span class="comment">// Allow the hashtables to grow to maximum possible size (~2G elements) before encoutering capacity overflow.</span></span><br><span class="line">           <span class="comment">// Note that this check works even when _items.Length overflowed thanks to the (uint) cast</span></span><br><span class="line">           <span class="keyword">if</span> ((<span class="built_in">uint</span>)newSize &gt; MaxPrimeArrayLength &amp;&amp; MaxPrimeArrayLength &gt; oldSize)</span><br><span class="line">           &#123;</span><br><span class="line">               Contract.Assert( MaxPrimeArrayLength == GetPrime(MaxPrimeArrayLength), <span class="string">&quot;Invalid MaxPrimeArrayLength&quot;</span>);</span><br><span class="line">               <span class="keyword">return</span> MaxPrimeArrayLength;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">return</span> GetPrime(newSize);</span><br><span class="line">       &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
 
-
-                        
-                    </div>
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2022/10/19/C#%E9%9B%86%E5%90%88/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2022/10/19/C#%E9%9B%86%E5%90%88/";
+            const title         = "「」";
+            const excerpt       = `Dictionary接口继承及规范函数12345678910 Dictionary&lt;TKey,TValue&gt;:IDictionary&lt;TKey,TValue&gt;, IDictionary, IReadOnlyDi...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    
+                </div>
+                <div class="pull-date">
+                    <time datetime="2022-10-17T18:59:41.318Z" itemprop="dateModified">最后编辑：2022-10-18</time>
                 </div>
             </div>
-            
-                <footer class="kratos-post-meta-new">
-                    <span class="pull-left">
-                        <time datetime="2022-10-19T07:57:46.962Z" itemprop="datePublished">
-                            <a><i class="fa fa-calendar"></i> 2022-10-19</a>
-                        </time>
-                        
-                        
-                            <!-- 当前仅支持valine/waline自带的统计功能 -->
-                            
-                        
-                        
-                            <!-- 当前仅支持waline自带的统计功能 -->
-                            
-                        
-                    </span>
-                    
-                    
-                        <span class="pull-right">
-                            <a class="read-more" href="/2022/10/19/C#%E9%9B%86%E5%90%88/" title="留言">留言<i class="fa fa-chevron-circle-right"></i></a>
-                        </span>
-                    
-
-                </footer>
-            
-        </article>
-    
-
-
-
-
-
-    <div class="hidden">
-        <!-- 加载文章阅读对应的统计功能，评论自带的那种 -->
-        
+        </footer>
     </div>
-
-
+    
+    
+</article>
 
         
 
