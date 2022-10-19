@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   
   
-  <title>查看动态 | NickBlog</title>
+  <title>C#集合 | NickBlog</title>
   <meta name="author" content="lyanc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -18,13 +18,13 @@
   
   <meta name="description" content="Dictionary接口继承及规范函数12345678910 Dictionary&lt;TKey,TValue&gt;:IDictionary&lt;TKey,TValue&gt;, IDictionary, IReadOnlyDictionary&lt;TKey, TValue&gt;, ISerializable, IDeserializationCallback IDictionary:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="查看动态">
-<meta property="og:url" content="http://example.com/2022/10/19/C#%E9%9B%86%E5%90%88/index.html">
+<meta property="og:title" content="C#集合">
+<meta property="og:url" content="http://example.com/2022/10/19/C-%E9%9B%86%E5%90%88/index.html">
 <meta property="og:site_name" content="NickBlog">
 <meta property="og:description" content="Dictionary接口继承及规范函数12345678910 Dictionary&lt;TKey,TValue&gt;:IDictionary&lt;TKey,TValue&gt;, IDictionary, IReadOnlyDictionary&lt;TKey, TValue&gt;, ISerializable, IDeserializationCallback IDictionary:">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-10-19T07:57:46.962Z">
-<meta property="article:modified_time" content="2022-10-17T18:59:41.318Z">
+<meta property="article:published_time" content="2022-10-19T08:03:22.000Z">
+<meta property="article:modified_time" content="2022-10-19T08:04:14.499Z">
 <meta property="article:author" content="lyanc">
 <meta name="twitter:card" content="summary">
   
@@ -203,6 +203,9 @@
         
           
           
+            <a class="list-group-item" href="/2022/10/19/C-%E9%9B%86%E5%90%88/"><i class="fa  fa-book"></i> C#集合</a>
+            
+          
         
       </ul>
   </div>
@@ -221,13 +224,15 @@
 
             <article itemscope itemtype="https://schema.org/Article">
     
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/19/C#%E9%9B%86%E5%90%88/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/19/C-%E9%9B%86%E5%90%88/">
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">C#集合</h1>
+            
             
             <ul class="kratos-post-meta text-center">
-                <li><time datetime="2022-10-19T07:57:46.962Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-10-19</time></li>
+                <li><time datetime="2022-10-19T08:03:22.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-10-19</time></li>
                 <li itemprop="author" itemscope itemtype="https://schema.org/Person">
                     <i class="fa fa-user"></i> 作者 <span itemprop="name">lyanc</span>
                 </li>
@@ -243,6 +248,11 @@
             </ul>
         </header>
         <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1666166654499"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
             
             
             
@@ -284,6 +294,7 @@
 
 <p>5.当entries长度和count相同时进行的扩容</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (count == entries.Length)</span><br><span class="line">               &#123;</span><br><span class="line">                   Resize();</span><br><span class="line">                   targetBucket = hashCode % buckets.Length;</span><br><span class="line">               &#125;</span><br><span class="line">               </span><br><span class="line">               </span><br><span class="line">     System.<span class="function">Collections          </span></span><br><span class="line"><span class="function"> <span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Resize</span>(<span class="params"><span class="built_in">int</span> newSize, <span class="built_in">bool</span> forceNewHashCodes</span>)</span> &#123;</span><br><span class="line">           Contract.Assert(newSize &gt;= entries.Length);</span><br><span class="line">           <span class="built_in">int</span>[] newBuckets = <span class="keyword">new</span> <span class="built_in">int</span>[newSize];</span><br><span class="line">           <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; newBuckets.Length; i++) newBuckets[i] = <span class="number">-1</span>;</span><br><span class="line">           Entry[] newEntries = <span class="keyword">new</span> Entry[newSize];</span><br><span class="line">           Array.Copy(entries, <span class="number">0</span>, newEntries, <span class="number">0</span>, count);</span><br><span class="line">           <span class="keyword">if</span>(forceNewHashCodes) &#123;</span><br><span class="line">               <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">                   <span class="keyword">if</span>(newEntries[i].hashCode != <span class="number">-1</span>) &#123;</span><br><span class="line">                       newEntries[i].hashCode = (comparer.GetHashCode(newEntries[i].key) &amp; <span class="number">0x7FFFFFFF</span>);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">               <span class="keyword">if</span> (newEntries[i].hashCode &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                   <span class="built_in">int</span> bucket = newEntries[i].hashCode % newSize;</span><br><span class="line">                   newEntries[i].next = newBuckets[bucket];</span><br><span class="line">                   newBuckets[bucket] = i;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           buckets = newBuckets;</span><br><span class="line">           entries = newEntries;</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">         <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Hashtable</span> : <span class="title">IDictionary</span>, <span class="title">ISerializable</span>, <span class="title">IDeserializationCallback</span>, <span class="title">ICloneable</span></span><br><span class="line">         &#123;</span><br><span class="line">       </span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> <span class="title">ExpandPrime</span>(<span class="params"><span class="built_in">int</span> oldSize</span>)</span></span><br><span class="line">       &#123;</span><br><span class="line">           <span class="built_in">int</span> newSize = <span class="number">2</span> * oldSize;</span><br><span class="line"></span><br><span class="line">           <span class="comment">// Allow the hashtables to grow to maximum possible size (~2G elements) before encoutering capacity overflow.</span></span><br><span class="line">           <span class="comment">// Note that this check works even when _items.Length overflowed thanks to the (uint) cast</span></span><br><span class="line">           <span class="keyword">if</span> ((<span class="built_in">uint</span>)newSize &gt; MaxPrimeArrayLength &amp;&amp; MaxPrimeArrayLength &gt; oldSize)</span><br><span class="line">           &#123;</span><br><span class="line">               Contract.Assert( MaxPrimeArrayLength == GetPrime(MaxPrimeArrayLength), <span class="string">&quot;Invalid MaxPrimeArrayLength&quot;</span>);</span><br><span class="line">               <span class="keyword">return</span> MaxPrimeArrayLength;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">return</span> GetPrime(newSize);</span><br><span class="line">       &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
 
 </div>
         </div>
@@ -338,7 +349,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://example.com/2022/10/19/C#%E9%9B%86%E5%90%88/",
+                text: "http://example.com/2022/10/19/C-%E9%9B%86%E5%90%88/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -350,8 +361,8 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://example.com/2022/10/19/C#%E9%9B%86%E5%90%88/";
-            const title         = "「」";
+            const hostUrl       = "http://example.com/2022/10/19/C-%E9%9B%86%E5%90%88/";
+            const title         = "「C#集合」";
             const excerpt       = `Dictionary接口继承及规范函数12345678910 Dictionary&lt;TKey,TValue&gt;:IDictionary&lt;TKey,TValue&gt;, IDictionary, IReadOnlyDi...`;
             let _URL;
             switch (dest) {
@@ -374,7 +385,7 @@
                     
                 </div>
                 <div class="pull-date">
-                    <time datetime="2022-10-17T18:59:41.318Z" itemprop="dateModified">最后编辑：2022-10-18</time>
+                    <time datetime="2022-10-19T08:04:14.499Z" itemprop="dateModified">最后编辑：2022-10-19</time>
                 </div>
             </div>
         </footer>
