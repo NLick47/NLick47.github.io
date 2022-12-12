@@ -139,7 +139,50 @@
             <div class="container">
                 <div id="main" class="row">
                     
-                        
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <div class="kratos-hentry kratos-post-inner clearfix">
+    <div class="kratos-post-content">
+        <h2 class="title-h2 text-center">搜索</h2>
+        <form class="input-group" onsubmit="return inpSearch();">
+            <input class="form-input input-lg" id="search-input" maxlength="80" name="s" placeholder="有什么想找找看的呢o(*￣▽￣*)ブ" required type="search">
+            <button class="btn btn-primary" type="submit">找一找~</button>
+        </form>
+    </div>
+</div>
+
+<div class="alert alert-info" id="kr-search-notice">
+    这里是 NickBlog 的搜索引擎~
+</div>
+
+<div id="result-posts">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <div class="kratos-post-content">
+            <p>搜索多个关键词时请用空格分割，例如「C#」这样；</p>
+            <p>您也可以使用这些标签碰碰运气哦~</p>
+            <p class="search-demo-tags">
+                <a href="/tags/C/" style="font-size: 18px; color: #b2b7be">C#</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>var searchDataFile = "/search.json";</script>
+<script defer src="/js/local-search.min.js"></script>
+
+        
+
+            </section>
+
+        
+
+                
+            
 
 <section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
     <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
@@ -179,7 +222,7 @@
                 标签
             </span>
             <span class="count">
-                0
+                1
             </span>
         </a>
     </div>
@@ -189,6 +232,13 @@
 
             
                 
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/C/" style="font-size: 0.6em;">C#</a>
+      </div>
+  </aside>
+
             
                 
   <aside id="krw-posts" class="widget widget-kratos-posts">
@@ -199,7 +249,7 @@
         
           
           
-            <a class="list-group-item" href="/2022/10/19/C-%E9%9B%86%E5%90%88/"><i class="fa  fa-book"></i> C#集合</a>
+            <a class="list-group-item" href="/2022/12/12/Dictionary%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Dictionary实现</a>
             
           
         
@@ -210,50 +260,7 @@
             
     </div>
 </section>
-                    
-
         
-
-            <section class="col-md-8">
-
-        
-
-            <div class="kratos-hentry kratos-post-inner clearfix">
-    <div class="kratos-post-content">
-        <h2 class="title-h2 text-center">搜索</h2>
-        <form class="input-group" onsubmit="return inpSearch();">
-            <input class="form-input input-lg" id="search-input" maxlength="80" name="s" placeholder="有什么想找找看的呢o(*￣▽￣*)ブ" required type="search">
-            <button class="btn btn-primary" type="submit">找一找~</button>
-        </form>
-    </div>
-</div>
-
-<div class="alert alert-info" id="kr-search-notice">
-    这里是 NickBlog 的搜索引擎~
-</div>
-
-<div id="result-posts">
-    <div class="kratos-hentry kratos-post-inner clearfix">
-        <div class="kratos-post-content">
-            <p>搜索多个关键词时请用空格分割，例如「」这样；</p>
-            <p>您也可以使用这些标签碰碰运气哦~</p>
-            <p class="search-demo-tags">
-                
-            </p>
-        </div>
-    </div>
-</div>
-
-<script>var searchDataFile = "/search.json";</script>
-<script defer src="/js/local-search.min.js"></script>
-
-        
-
-            </section>
-
-        
-
-                
         </div>
     </div>
 </div>

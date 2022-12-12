@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>Dictionary实现 | NickBlog</title>
+  <meta name="author" content="lyanc" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="C#" />
+  
+  <meta name="description" content=".netframework中Dictionary源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dictionary实现">
+<meta property="og:url" content="http://example.com/2022/12/12/Dictionary%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="NickBlog">
+<meta property="og:description" content=".netframework中Dictionary源码">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-12-12T13:12:31.000Z">
+<meta property="article:modified_time" content="2022-12-12T14:09:47.525Z">
+<meta property="article:author" content="lyanc">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night.min.css" media="all"></script>
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li>
+                                            
+                                                <a href="/">
+                                            
+                                                
+                                                    <i class="fa fa-home"></i>
+                                                
+                                                首页
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                        <li>
+                                            
+                                                <a href="/archives/">
+                                            
+                                                
+                                                    <i class="fa fa-file"></i>
+                                                
+                                                档案馆
+                                            </a>
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">NickBlog</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>NickBlog</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/12/Dictionary%E5%AE%9E%E7%8E%B0/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Dictionary实现</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2022-12-12T13:12:31.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-12-12</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">lyanc</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~30.59K
+                    
+                    字
+                </li>
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1670854187525"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+                <div class="kratos-post-inner-toc toc-div-class" >
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E5%85%B3"><span class="toc-number">2.</span> <span class="toc-text">无关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hash%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">Hash算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFhash%E7%AE%97%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">1  什么是hash算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A2%B0%E6%92%9E"><span class="toc-number">3.2.</span> <span class="toc-text">2.碰撞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81%E6%96%B9%E5%BC%8F"><span class="toc-number">3.3.</span> <span class="toc-text">3.解决冲突方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.4.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="toc-number">4.</span> <span class="toc-text">文件传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#netframework%E4%B8%ADhash%E7%AE%97%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">.netframework中hash算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary%E5%A5%BD%E5%A4%84"><span class="toc-number">6.</span> <span class="toc-text">Dictionary好处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary%E7%9A%84%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%84"><span class="toc-number">7.</span> <span class="toc-text">Dictionary的继承结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IDictionary"><span class="toc-number">7.1.</span> <span class="toc-text">IDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICollection"><span class="toc-number">7.2.</span> <span class="toc-text">ICollection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IEnumerable"><span class="toc-number">7.3.</span> <span class="toc-text">IEnumerable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IReadOnlyDictionary"><span class="toc-number">7.4.</span> <span class="toc-text">IReadOnlyDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IReadOnlyCollection"><span class="toc-number">7.5.</span> <span class="toc-text">IReadOnlyCollection</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Source"><span class="toc-number">8.</span> <span class="toc-text">Source</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#private-struct"><span class="toc-number">8.1.</span> <span class="toc-text">private struct</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#private-variable"><span class="toc-number">8.2.</span> <span class="toc-text">private  variable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1Insert"><span class="toc-number">8.3.</span> <span class="toc-text">第一次Insert</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="toc-number">8.3.1.</span> <span class="toc-text">操作过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A2%B0%E6%92%9E%E5%A4%84%E7%90%86"><span class="toc-number">8.3.2.</span> <span class="toc-text">碰撞处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resize"><span class="toc-number">8.4.</span> <span class="toc-text">Resize</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IsPrime-int-candidate-%E5%87%BD%E6%95%B0"><span class="toc-number">8.4.1.</span> <span class="toc-text">IsPrime(int candidate) 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resize-int-newSize-bool-forceNewHashCodes-%E5%87%BD%E6%95%B0"><span class="toc-number">8.4.2.</span> <span class="toc-text">Resize(int newSize, bool forceNewHashCodes)函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GetValue"><span class="toc-number">8.5.</span> <span class="toc-text">GetValue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%99%A8"><span class="toc-number">8.5.1.</span> <span class="toc-text">索引器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TryGetValue"><span class="toc-number">8.5.2.</span> <span class="toc-text">TryGetValue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Remove"><span class="toc-number">8.6.</span> <span class="toc-text">Remove</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Version"><span class="toc-number">8.7.</span> <span class="toc-text">Version</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8"><span class="toc-number">8.7.1.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IL%E7%A0%81"><span class="toc-number">8.7.2.</span> <span class="toc-text">IL码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#foreach"><span class="toc-number">8.7.3.</span> <span class="toc-text">foreach</span></a></li></ol></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>[TOC]</p>
+<p>[^.netframework 原码地址：<a target="_blank" rel="noopener" href="https://referencesource.microsoft.com/]">https://referencesource.microsoft.com/]</a>: </p>
+<h1 id="无关"><a href="#无关" class="headerlink" title="无关"></a>无关</h1><p>第一次写文章，而这篇文章是我边看源码边写得，技术有限会有不对得地方，不过会尽最大能力去写。如有问题欢迎讨论</p>
+<p>由这篇文章开启一条成为大佬之路吧，由简到难，先还是从最简单而我又很喜欢的C#开始,ing</p>
+<h1 id="Hash算法"><a href="#Hash算法" class="headerlink" title="Hash算法"></a>Hash算法</h1><h2 id="1-什么是hash算法"><a href="#1-什么是hash算法" class="headerlink" title="1  什么是hash算法"></a>1  什么是hash算法</h2><p>hash算法又称散列算法，目的是把二进制内容计算成有限字符串或数字随机组成的散列值</p>
+<p>特点：</p>
+<p>不同的二进制经过hash算法后的得到得散列值也有概率会相同，概率高低与算法好坏有关（续）</p>
+<p>相同的二进制经过hash算法得到的散列值一定相同</p>
+<p>散列值是不可逆的，能够被逆向得值都是编码或特俗加密内容（如web传输中的base64编码）</p>
+<h2 id="2-碰撞"><a href="#2-碰撞" class="headerlink" title="2.碰撞"></a>2.碰撞</h2><p>描述hash算法时有与算法好坏有关？</p>
+<p>那碰撞又是什么呢？</p>
+<p>就是二个不同的二进制组成的数据，被计算成了相同的hash值</p>
+<p>好的算法 碰撞率更低，时间复杂度更高</p>
+<p>坏的算法 碰撞率提高，时间复杂度更低</p>
+<h2 id="3-解决冲突方式"><a href="#3-解决冲突方式" class="headerlink" title="3.解决冲突方式"></a>3.解决冲突方式</h2><p><strong>1. 拉链法：</strong>这种方法的思路是将产生冲突的元素建立一个单链表，并将头指针地址存储至Hash表对应桶的位置。这样定位到Hash表桶的位置后可通过遍历单链表的形式来查找元素。</p>
+<p><strong>2. 再Hash法：</strong>得到hash值后再调用hash函数，直到解决冲突。</p>
+<p>—Dictionary使用得就是拉链法，其它方法自行了解把—</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="文件传输"><a href="#文件传输" class="headerlink" title="文件传输"></a>文件传输</h1><p>如客户端上传了一个文件，对于服务端比较合理得做法就是，查找该文件是否已经保存在硬盘中了，如不存在就进行io写入 这时候就用到了该算法，转换为一定长度得字符或数字，这样文件就具有了可以标识得值，更快去配合sql查找，或在文件传输前使用hash记录下来，传输完成后次hash，去比较两次hash值判，来断传输中是不是文件被篡改过。可以采用MD5或SHA-1去实现，文件使用SHA-1 计算出来得散列值更不容易发生碰撞 </p>
+<p>md5更应该去加密不敏感的信息，可以配合原文+salt，或者进行多次hash提高安全性</p>
+<h1 id="netframework中hash算法"><a href="#netframework中hash算法" class="headerlink" title=".netframework中hash算法"></a>.netframework中hash算法</h1><p>ValueType 类型要做为Dictionary的Key 要去重写GetHashCode()，Equals() </p>
+<p>对象类型不重写 最后都会调用</p>
+<p> object.InternalGetHashCode(this);来生成，该实现来自外部代码，通常由c++这种</p>
+<p>如何去重写GetHashCode()？个人采用该类的属性，或者字段进行 xor 运算（减低碰撞发生概率，在字典中能快速查找就行)</p>
+<p>为什么还要重写Equals()？使得hash碰撞时需要使用比较器</p>
+<h1 id="Dictionary好处"><a href="#Dictionary好处" class="headerlink" title="Dictionary好处"></a>Dictionary好处</h1><p>查找时间复杂度接近于常量级别，相当于直接用数组下标拿出元素</p>
+<p>可以对程序经常用到的数据进行使用，达到高速存取修改的目地</p>
+<p>缺陷</p>
+<p>数据量较多的字典在framework达到碰撞阈值或者数组扩容都会有性能影响，</p>
+<p>最求性能极致也可以在初始化时指定构建合适大小的容量</p>
+<h1 id="Dictionary的继承结构"><a href="#Dictionary的继承结构" class="headerlink" title="Dictionary的继承结构"></a>Dictionary的继承结构</h1><p>为了方便把源码都贴过来,没有贴namespace都在System.Collections命名空间下</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Dictionary</span>&lt;<span class="title">TKey</span>,<span class="title">TValue</span>&gt;: <span class="title">IDictionary</span>&lt;<span class="title">TKey</span>,<span class="title">TValue</span>&gt;, <span class="title">IDictionary</span>, <span class="title">IReadOnlyDictionary</span>&lt;<span class="title">TKey</span>, <span class="title">TValue</span>&gt;, <span class="title">ISerializable</span>, <span class="title">IDeserializationCallback</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="IDictionary"><a href="#IDictionary" class="headerlink" title="IDictionary"></a>IDictionary</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public interface IDictionary : ICollection</span><br><span class="line"> &#123;</span><br><span class="line">     // Interfaces are not serializable</span><br><span class="line">     // The Item property provides methods to read and edit entries </span><br><span class="line">     // in the Dictionary.</span><br><span class="line">     Object this[Object key] &#123;</span><br><span class="line">         get;</span><br><span class="line">         set;</span><br><span class="line">     &#125;</span><br><span class="line"> </span><br><span class="line">     // Returns a collections of the keys in this dictionary.</span><br><span class="line">     ICollection Keys &#123;</span><br><span class="line">         get;</span><br><span class="line">     &#125;</span><br><span class="line"> </span><br><span class="line">     // Returns a collections of the values in this dictionary.</span><br><span class="line">     ICollection Values &#123;</span><br><span class="line">         get;</span><br><span class="line">     &#125;</span><br><span class="line"> </span><br><span class="line">     // Returns whether this dictionary contains a particular key.</span><br><span class="line">     //</span><br><span class="line">     bool Contains(Object key);</span><br><span class="line"> </span><br><span class="line">     // Adds a key-value pair to the dictionary.</span><br><span class="line">     // </span><br><span class="line">     void Add(Object key, Object value);</span><br><span class="line"> </span><br><span class="line">     // Removes all pairs from the dictionary.</span><br><span class="line">     void Clear();</span><br><span class="line"> </span><br><span class="line">     bool IsReadOnly </span><br><span class="line">     &#123; get; &#125;</span><br><span class="line"> </span><br><span class="line">     bool IsFixedSize</span><br><span class="line">     &#123; get; &#125;</span><br><span class="line"> </span><br><span class="line">     // Returns an IDictionaryEnumerator for this dictionary.</span><br><span class="line">     new IDictionaryEnumerator GetEnumerator();</span><br><span class="line"> </span><br><span class="line">     // Removes a particular key from the dictionary.</span><br><span class="line">     //</span><br><span class="line">     void Remove(Object key);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ICollection"><a href="#ICollection" class="headerlink" title="ICollection"></a>ICollection</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICollection</span> : <span class="title">IEnumerable</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Interfaces are not serialable</span></span><br><span class="line">        <span class="comment">// CopyTo copies a collection into an Array, starting at a particular</span></span><br><span class="line">        <span class="comment">// index into the array.</span></span><br><span class="line">        <span class="comment">// </span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">CopyTo</span>(<span class="params">Array array, <span class="built_in">int</span> index</span>)</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Number of items in the collections.</span></span><br><span class="line">        <span class="built_in">int</span> Count</span><br><span class="line">        &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">// SyncRoot will return an Object to use for synchronization </span></span><br><span class="line">        <span class="comment">// (thread safety).  You can use this object in your code to take a</span></span><br><span class="line">        <span class="comment">// lock on the collection, even if this collection is a wrapper around</span></span><br><span class="line">        <span class="comment">// another collection.  The intent is to tunnel through to a real </span></span><br><span class="line">        <span class="comment">// implementation of a collection, and use one of the internal objects</span></span><br><span class="line">        <span class="comment">// found in that code.</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="comment">// In the absense of a static Synchronized method on a collection, </span></span><br><span class="line">        <span class="comment">// the expected usage for SyncRoot would look like this:</span></span><br><span class="line">        <span class="comment">// </span></span><br><span class="line">        <span class="comment">// ICollection col = ...</span></span><br><span class="line">        <span class="comment">// lock (col.SyncRoot) &#123;</span></span><br><span class="line">        <span class="comment">//     // Some operation on the collection, which is now thread safe.</span></span><br><span class="line">        <span class="comment">//     // This may include multiple operations.</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="comment">// </span></span><br><span class="line">        <span class="comment">// </span></span><br><span class="line">        <span class="comment">// The system-provided collections have a static method called </span></span><br><span class="line">        <span class="comment">// Synchronized which will create a thread-safe wrapper around the </span></span><br><span class="line">        <span class="comment">// collection.  All access to the collection that you want to be </span></span><br><span class="line">        <span class="comment">// thread-safe should go through that wrapper collection.  However, if</span></span><br><span class="line">        <span class="comment">// you need to do multiple calls on that collection (such as retrieving</span></span><br><span class="line">        <span class="comment">// two items, or checking the count then doing something), you should</span></span><br><span class="line">        <span class="comment">// NOT use our thread-safe wrapper since it only takes a lock for the</span></span><br><span class="line">        <span class="comment">// duration of a single method call.  Instead, use Monitor.Enter/Exit</span></span><br><span class="line">        <span class="comment">// or your language&#x27;s equivalent to the C# lock keyword as mentioned </span></span><br><span class="line">        <span class="comment">// above.</span></span><br><span class="line">        <span class="comment">// </span></span><br><span class="line">        <span class="comment">// For collections with no publically available underlying store, the </span></span><br><span class="line">        <span class="comment">// expected implementation is to simply return the this pointer.  Note </span></span><br><span class="line">        <span class="comment">// that the this pointer may not be sufficient for collections that </span></span><br><span class="line">        <span class="comment">// wrap other collections;  those should return the underlying </span></span><br><span class="line">        <span class="comment">// collection&#x27;s SyncRoot property.</span></span><br><span class="line">        Object SyncRoot</span><br><span class="line">        &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">            </span><br><span class="line">        <span class="comment">// Is this collection synchronized (i.e., thread-safe)?  If you want a </span></span><br><span class="line">        <span class="comment">// thread-safe collection, you can use SyncRoot as an object to </span></span><br><span class="line">        <span class="comment">// synchronize your collection with.  If you&#x27;re using one of the </span></span><br><span class="line">        <span class="comment">// collections in System.Collections, you could call the static </span></span><br><span class="line">        <span class="comment">// Synchronized method to get a thread-safe wrapper around the </span></span><br><span class="line">        <span class="comment">// underlying collection.</span></span><br><span class="line">        <span class="built_in">bool</span> IsSynchronized</span><br><span class="line">        &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="IEnumerable"><a href="#IEnumerable" class="headerlink" title="IEnumerable"></a>IEnumerable</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IEnumerable</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Interfaces are not serializable</span></span><br><span class="line">        <span class="comment">// Returns an IEnumerator for this enumerable Object.  The enumerator provides</span></span><br><span class="line">        <span class="comment">// a simple way to access all the contents of a collection.</span></span><br><span class="line">        [<span class="meta">Pure</span>]</span><br><span class="line">        [<span class="meta">DispId(-4)</span>]</span><br><span class="line">        <span class="function">IEnumerator <span class="title">GetEnumerator</span>()</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">if</span> CONTRACTS_FULL</span></span><br><span class="line">    [<span class="meta">ContractClassFor(typeof(IEnumerable))</span>]</span><br><span class="line">    <span class="keyword">internal</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">IEnumerableContract</span> : <span class="title">IEnumerable</span></span><br><span class="line">    &#123;</span><br><span class="line">        [<span class="meta">Pure</span>]</span><br><span class="line">        IEnumerator IEnumerable.GetEnumerator()</span><br><span class="line">        &#123;</span><br><span class="line">            Contract.Ensures(Contract.Result&lt;IEnumerator&gt;() != <span class="literal">null</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">default</span>(IEnumerator);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IEnumerator</span></span><br><span class="line">   &#123;</span><br><span class="line">       <span class="comment">// Interfaces are not serializable</span></span><br><span class="line">       <span class="comment">// Advances the enumerator to the next element of the enumeration and</span></span><br><span class="line">       <span class="comment">// returns a boolean indicating whether an element is available. Upon</span></span><br><span class="line">       <span class="comment">// creation, an enumerator is conceptually positioned before the first</span></span><br><span class="line">       <span class="comment">// element of the enumeration, and the first call to MoveNext </span></span><br><span class="line">       <span class="comment">// brings the first element of the enumeration into view.</span></span><br><span class="line">       <span class="comment">// </span></span><br><span class="line">       <span class="function"><span class="built_in">bool</span> <span class="title">MoveNext</span>()</span>;</span><br><span class="line">   </span><br><span class="line">       <span class="comment">// Returns the current element of the enumeration. The returned value is</span></span><br><span class="line">       <span class="comment">// undefined before the first call to MoveNext and following a</span></span><br><span class="line">       <span class="comment">// call to MoveNext that returned false. Multiple calls to</span></span><br><span class="line">       <span class="comment">// GetCurrent with no intervening calls to MoveNext </span></span><br><span class="line">       <span class="comment">// will return the same object.</span></span><br><span class="line">       <span class="comment">// </span></span><br><span class="line">       Object Current &#123;</span><br><span class="line">           <span class="keyword">get</span>; </span><br><span class="line">       &#125;</span><br><span class="line">   </span><br><span class="line">       <span class="comment">// Resets the enumerator to the beginning of the enumeration, starting over.</span></span><br><span class="line">       <span class="comment">// The preferred behavior for Reset is to return the exact same enumeration.</span></span><br><span class="line">       <span class="comment">// This means if you modify the underlying collection then call Reset, your</span></span><br><span class="line">       <span class="comment">// IEnumerator will be invalid, just as it would have been if you had called</span></span><br><span class="line">       <span class="comment">// MoveNext or Current.</span></span><br><span class="line">       <span class="comment">//</span></span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">Reset</span>()</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="IReadOnlyDictionary"><a href="#IReadOnlyDictionary" class="headerlink" title="IReadOnlyDictionary"></a>IReadOnlyDictionary</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">System.Collections.Generic</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Provides a read-only view of a generic dictionary.</span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> CONTRACTS_FULL</span></span><br><span class="line">    [<span class="meta">ContractClass(typeof(IReadOnlyDictionaryContract&lt;,&gt;))</span>]</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IReadOnlyDictionary</span>&lt;<span class="title">TKey</span>, <span class="title">TValue</span>&gt; : <span class="title">IReadOnlyCollection</span>&lt;<span class="title">KeyValuePair</span>&lt;<span class="title">TKey</span>, <span class="title">TValue</span>&gt;&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="built_in">bool</span> <span class="title">ContainsKey</span>(<span class="params">TKey key</span>)</span>;</span><br><span class="line">        <span class="function"><span class="built_in">bool</span> <span class="title">TryGetValue</span>(<span class="params">TKey key, <span class="keyword">out</span> TValue <span class="keyword">value</span></span>)</span>;</span><br><span class="line"> </span><br><span class="line">        TValue <span class="keyword">this</span>[TKey key] &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">        IEnumerable&lt;TKey&gt; Keys &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">        IEnumerable&lt;TValue&gt; Values &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="IReadOnlyCollection"><a href="#IReadOnlyCollection" class="headerlink" title="IReadOnlyCollection"></a>IReadOnlyCollection</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">System.Collections.Generic</span></span><br><span class="line">&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Provides a read-only, covariant view of a generic list.</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Note that T[] : IReadOnlyList&lt;T&gt;, and we want to ensure that if you use</span></span><br><span class="line">    <span class="comment">// IList&lt;YourValueType&gt;, we ensure a YourValueType[] can be used </span></span><br><span class="line">    <span class="comment">// without jitting.  Hence the TypeDependencyAttribute on SZArrayHelper.</span></span><br><span class="line">    <span class="comment">// This is a special hack internally though - see VM\compile.cpp.</span></span><br><span class="line">    <span class="comment">// The same attribute is on IList&lt;T&gt;, IEnumerable&lt;T&gt;, ICollection&lt;T&gt;, and IReadOnlyList&lt;T&gt;.</span></span><br><span class="line">    [<span class="meta">TypeDependencyAttribute(<span class="string">&quot;System.SZArrayHelper&quot;</span>)</span>]</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> CONTRACTS_FULL</span></span><br><span class="line">    [<span class="meta">ContractClass(typeof(IReadOnlyCollectionContract&lt;&gt;))</span>]</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="comment">// If we ever implement more interfaces on IReadOnlyCollection, we should also update RuntimeTypeCache.PopulateInterfaces() in rttype.cs</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IReadOnlyCollection</span>&lt;<span class="keyword">out</span> <span class="title">T</span>&gt; : <span class="title">IEnumerable</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">int</span> Count &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h1><h2 id="private-struct"><a href="#private-struct" class="headerlink" title="private struct"></a>private struct</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">struct</span> Entry &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> hashCode;    <span class="comment">// 除符号位以外的31位hashCode值, 如果该Entry没有被使用，那么为-1</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> next;        <span class="comment">// 下一个元素的下标索引，如果没有下一个就为-1</span></span><br><span class="line">    <span class="keyword">public</span> TKey key;        <span class="comment">// 存放元素的键</span></span><br><span class="line">    <span class="keyword">public</span> TValue <span class="keyword">value</span>;    <span class="comment">// 存放元素的值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="private-variable"><a href="#private-variable" class="headerlink" title="private  variable"></a>private  variable</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="built_in">int</span>[] buckets;		<span class="comment">// hash桶</span></span><br><span class="line"><span class="keyword">private</span> Entry[] entries;	<span class="comment">// 存放元素</span></span><br><span class="line"><span class="keyword">private</span> <span class="built_in">int</span> count;			<span class="comment">// 当前entries的index位置</span></span><br><span class="line"><span class="keyword">private</span> <span class="built_in">int</span> version;		<span class="comment">// 当前版本，防止迭代过程中集合被更改</span></span><br><span class="line"><span class="keyword">private</span> <span class="built_in">int</span> freeList;		<span class="comment">// 被删除Entry在entries中的下标index，这个位置是空闲的</span></span><br><span class="line"><span class="keyword">private</span> <span class="built_in">int</span> freeCount;		<span class="comment">// 有多少个被删除的Entry，有多少个空闲的位置</span></span><br><span class="line"><span class="keyword">private</span> IEqualityComparer&lt;TKey&gt; comparer;	<span class="comment">// 比较器</span></span><br><span class="line"><span class="keyword">private</span> KeyCollection keys;		<span class="comment">// Key集合</span></span><br><span class="line"><span class="keyword">private</span> ValueCollection values;		<span class="comment">// Value集合</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="第一次Insert"><a href="#第一次Insert" class="headerlink" title="第一次Insert"></a>第一次Insert</h2><p>进行第一次添加代码简化为</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Insert</span>(<span class="params">TKey key, TValue <span class="keyword">value</span>, <span class="built_in">bool</span> <span class="keyword">add</span></span>)</span> &#123;   </span><br><span class="line">     <span class="keyword">if</span> (buckets == <span class="literal">null</span>) Initialize(<span class="number">0</span>);</span><br><span class="line">     <span class="built_in">int</span> hashCode = comparer.GetHashCode(key) &amp; <span class="number">0x7FFFFFFF</span>;</span><br><span class="line">     <span class="built_in">int</span> targetBucket = hashCode % buckets.Length;</span><br><span class="line">     <span class="built_in">int</span> index;</span><br><span class="line">     index = count;</span><br><span class="line">     count++;</span><br><span class="line">     entries[index].hashCode = hashCode;</span><br><span class="line">     entries[index].next = buckets[targetBucket];</span><br><span class="line">     entries[index].key = key;</span><br><span class="line">     entries[index].<span class="keyword">value</span> = <span class="keyword">value</span>;</span><br><span class="line">     buckets[targetBucket] = index;</span><br><span class="line">     version++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Initialize</span>(<span class="params"><span class="built_in">int</span> capacity</span>)</span> &#123;</span><br><span class="line">            <span class="built_in">int</span> size = HashHelpers.GetPrime(capacity);</span><br><span class="line">            buckets = <span class="keyword">new</span> <span class="built_in">int</span>[size];</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; buckets.Length; i++) buckets[i] = <span class="number">-1</span>;</span><br><span class="line">            entries = <span class="keyword">new</span> Entry[size];</span><br><span class="line">            freeList = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>当创建字典时赋予初始字典大小，会在构造函数时调用</p>
+<p>Initialize(int capacity)</p>
+<p>假设本次没有给定字典初始大小</p>
+<p>Initialize(int capacity) 会分别初始化4个entries hashcode &#x3D; -1，next &#x3D; -1  和 4个  buckets  默认值 -1 数组</p>
+<h3 id="操作过程"><a href="#操作过程" class="headerlink" title="操作过程"></a>操作过程</h3><p>假如第一次调用Add(9，12)，hashcode为10</p>
+<p>1.通过对hashCode Mod 运算，计算出该元素落在哪一个buckets桶中。现在桶的长度（<code>buckets.Length</code>）为4，Mod操作9 % 4最后落在<code>index</code>为1的桶中，也就是&#96;buckets[1]。对于这一次添加，entries下标使用的是count</p>
+<p>2..buckets赋值为index，buckets[1] &#x3D; 0;</p>
+<p>3.version++ 与迭代器有关</p>
+<p>结论 buckets存放的值是元素在entries数组里的下标，如果buckets取出的值为-1，则代表没有元素存放</p>
+<h3 id="碰撞处理"><a href="#碰撞处理" class="headerlink" title="碰撞处理"></a>碰撞处理</h3><p>在最理想情况下，当然想的是每个桶都有它对应的一个元素下标，而</p>
+<p>int targetBucket &#x3D; hashCode % buckets.Length;这种运算会多次命中在一个桶上，比如再次Add(5,102)</p>
+<p>5 mod 4</p>
+<p> buckets[1] &#x3D; 1;原来得值将会被覆盖，这是不被希望得， 所以采用entries[index].next &#x3D; buckets[targetBucket]</p>
+<p>多次命中在一个桶上就构建成了一个单向链表，next就记录了在同一个桶里上一次添加的元素下标，-1代表这是最后一个元素，而collisionCount变量记录命中在该hash桶上的元素数量</p>
+<p>可以查看下面逻辑</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/....</span><br><span class="line">    <span class="built_in">int</span> hashCode = comparer.GetHashCode(key) &amp; <span class="number">0x7FFFFFFF</span>;</span><br><span class="line">     <span class="built_in">int</span> targetBucket = hashCode % buckets.Length;</span><br><span class="line">/....</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> collisionCount = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = buckets[targetBucket]; i &gt;= <span class="number">0</span>; i = entries[i].next) &#123;</span><br><span class="line">                <span class="keyword">if</span> (entries[i].hashCode == hashCode &amp;&amp; comparer.Equals(entries[i].key, key)) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (<span class="keyword">add</span>) &#123; </span><br><span class="line">                        ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_AddingDuplicate);</span><br><span class="line">                    &#125;</span><br><span class="line">                    entries[i].<span class="keyword">value</span> = <span class="keyword">value</span>;</span><br><span class="line">                    version++;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">    collisionCount++;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//.....</span></span><br><span class="line">    <span class="comment">//.....</span></span><br><span class="line">    entries[index].hashCode = hashCode;</span><br><span class="line">     entries[index].next = buckets[targetBucket];</span><br><span class="line">     entries[index].key = key;</span><br><span class="line">     entries[index].<span class="keyword">value</span> = <span class="keyword">value</span>;</span><br><span class="line">     buckets[targetBucket] = index;</span><br><span class="line">    <span class="comment">//</span></span><br></pre></td></tr></table></figure>
+
+<p>添加时键已存在时会抛异常得</p>
+<h2 id="Resize"><a href="#Resize" class="headerlink" title="Resize"></a>Resize</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">ADD:</span><br><span class="line"><span class="built_in">int</span> index;</span><br><span class="line">            <span class="keyword">if</span> (freeCount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                index = freeList;</span><br><span class="line">                freeList = entries[index].next;</span><br><span class="line">                freeCount--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (count == entries.Length)</span><br><span class="line">                &#123;</span><br><span class="line">                    Resize();</span><br><span class="line">                    targetBucket = hashCode % buckets.Length;</span><br><span class="line">                &#125;</span><br><span class="line">                index = count;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/....</span><br><span class="line">    entries[index].hashCode = hashCode;</span><br><span class="line">     </span><br><span class="line"><span class="comment">//....</span></span><br><span class="line">     buckets[targetBucket] = index;</span><br><span class="line">/....</span><br><span class="line">    <span class="keyword">if</span>(collisionCount &gt; HashHelpers.HashCollisionThreshold &amp;&amp; HashHelpers.IsWellKnownEqualityComparer(comparer)) </span><br><span class="line">            &#123;</span><br><span class="line">                comparer = (IEqualityComparer&lt;TKey&gt;) HashHelpers.GetRandomizedEqualityComparer(comparer);</span><br><span class="line">                Resize(entries.Length, <span class="literal">true</span>);</span><br><span class="line">            &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Resize</span>()</span> &#123;</span><br><span class="line">            Resize(HashHelpers.ExpandPrime(count), <span class="literal">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Resize</span>(<span class="params"><span class="built_in">int</span> newSize, <span class="built_in">bool</span> forceNewHashCodes</span>)</span> &#123;</span><br><span class="line">            Contract.Assert(newSize &gt;= entries.Length);</span><br><span class="line">            <span class="built_in">int</span>[] newBuckets = <span class="keyword">new</span> <span class="built_in">int</span>[newSize];</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; newBuckets.Length; i++) newBuckets[i] = <span class="number">-1</span>;</span><br><span class="line">            Entry[] newEntries = <span class="keyword">new</span> Entry[newSize];</span><br><span class="line">            Array.Copy(entries, <span class="number">0</span>, newEntries, <span class="number">0</span>, count);</span><br><span class="line">            <span class="keyword">if</span>(forceNewHashCodes) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(newEntries[i].hashCode != <span class="number">-1</span>) &#123;</span><br><span class="line">                        newEntries[i].hashCode = (comparer.GetHashCode(newEntries[i].key) &amp; <span class="number">0x7FFFFFFF</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (newEntries[i].hashCode &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="built_in">int</span> bucket = newEntries[i].hashCode % newSize;</span><br><span class="line">                    newEntries[i].next = newBuckets[bucket];</span><br><span class="line">                    newBuckets[bucket] = i;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            buckets = newBuckets;</span><br><span class="line">            entries = newEntries;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"> [<span class="meta">FriendAccessAllowed</span>]</span><br><span class="line">    <span class="keyword">internal</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">HashHelpers</span></span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="built_in">int</span>[] primes = &#123;</span><br><span class="line">            <span class="number">3</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">17</span>, <span class="number">23</span>, <span class="number">29</span>, <span class="number">37</span>, <span class="number">47</span>, <span class="number">59</span>, <span class="number">71</span>, <span class="number">89</span>, <span class="number">107</span>, <span class="number">131</span>, <span class="number">163</span>, <span class="number">197</span>, <span class="number">239</span>, <span class="number">293</span>, <span class="number">353</span>, <span class="number">431</span>, <span class="number">521</span>, <span class="number">631</span>, <span class="number">761</span>, <span class="number">919</span>,</span><br><span class="line">            <span class="number">1103</span>, <span class="number">1327</span>, <span class="number">1597</span>, <span class="number">1931</span>, <span class="number">2333</span>, <span class="number">2801</span>, <span class="number">3371</span>, <span class="number">4049</span>, <span class="number">4861</span>, <span class="number">5839</span>, <span class="number">7013</span>, <span class="number">8419</span>, <span class="number">10103</span>, <span class="number">12143</span>, <span class="number">14591</span>,</span><br><span class="line">            <span class="number">17519</span>, <span class="number">21023</span>, <span class="number">25229</span>, <span class="number">30293</span>, <span class="number">36353</span>, <span class="number">43627</span>, <span class="number">52361</span>, <span class="number">62851</span>, <span class="number">75431</span>, <span class="number">90523</span>, <span class="number">108631</span>, <span class="number">130363</span>, <span class="number">156437</span>,</span><br><span class="line">            <span class="number">187751</span>, <span class="number">225307</span>, <span class="number">270371</span>, <span class="number">324449</span>, <span class="number">389357</span>, <span class="number">467237</span>, <span class="number">560689</span>, <span class="number">672827</span>, <span class="number">807403</span>, <span class="number">968897</span>, <span class="number">1162687</span>, <span class="number">1395263</span>,</span><br><span class="line">            <span class="number">1674319</span>, <span class="number">2009191</span>, <span class="number">2411033</span>, <span class="number">2893249</span>, <span class="number">3471899</span>, <span class="number">4166287</span>, <span class="number">4999559</span>, <span class="number">5999471</span>, <span class="number">7199369</span>&#125;;</span><br><span class="line">		<span class="comment">// 放回新容量大小</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> <span class="title">ExpandPrime</span>(<span class="params"><span class="built_in">int</span> oldSize</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">int</span> newSize = <span class="number">2</span> * oldSize;</span><br><span class="line"> </span><br><span class="line">            <span class="comment">// Allow the hashtables to grow to maximum possible size (~2G elements) before encoutering capacity overflow.</span></span><br><span class="line">            <span class="comment">// Note that this check works even when _items.Length overflowed thanks to the (uint) cast</span></span><br><span class="line">            <span class="keyword">if</span> ((<span class="built_in">uint</span>)newSize &gt; MaxPrimeArrayLength &amp;&amp; MaxPrimeArrayLength &gt; oldSize)</span><br><span class="line">            &#123;</span><br><span class="line">                Contract.Assert( MaxPrimeArrayLength == GetPrime(MaxPrimeArrayLength), <span class="string">&quot;Invalid MaxPrimeArrayLength&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span> MaxPrimeArrayLength;</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">return</span> GetPrime(newSize);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> <span class="title">GetPrime</span>(<span class="params"><span class="built_in">int</span> min</span>)</span> </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (min &lt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ArgumentException(Environment.GetResourceString(<span class="string">&quot;Arg_HTCapacityOverflow&quot;</span>));</span><br><span class="line">            Contract.EndContractBlock();</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; primes.Length; i++) </span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">int</span> prime = primes[i];</span><br><span class="line">                <span class="keyword">if</span> (prime &gt;= min) <span class="keyword">return</span> prime;</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            <span class="comment">//outside of our predefined table. </span></span><br><span class="line">            <span class="comment">//compute the hard way. </span></span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = (min | <span class="number">1</span>); i &lt; Int32.MaxValue;i+=<span class="number">2</span>) </span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (IsPrime(i) &amp;&amp; ((i - <span class="number">1</span>) % Hashtable.HashPrime != <span class="number">0</span>))</span><br><span class="line">                    <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> min;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[<span class="meta">ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)</span>]</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">bool</span> <span class="title">IsPrime</span>(<span class="params"><span class="built_in">int</span> candidate</span>)</span> </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((candidate &amp; <span class="number">1</span>) != <span class="number">0</span>) </span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">int</span> limit = (<span class="built_in">int</span>)Math.Sqrt (candidate);</span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">int</span> divisor = <span class="number">3</span>; divisor &lt;= limit; divisor+=<span class="number">2</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> ((candidate % divisor) == <span class="number">0</span>)</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> (candidate == <span class="number">2</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>从Insert方法可以发现，代码段调用了2次Resize函数，其中一次是数组空间用尽，第二次是命中同一个桶的数量达到了阈值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public const int HashCollisionThreshold = 100; //在.netframework4.8中该阈值数</span><br></pre></td></tr></table></figure>
+
+<p>第二次调用该函数会去使用另一种比较器，代码段中有微软开发者注释</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashHelpers.IsWellKnownEqualityComparer(comparer)</span><br></pre></td></tr></table></figure>
+
+<h3 id="IsPrime-int-candidate-函数"><a href="#IsPrime-int-candidate-函数" class="headerlink" title="IsPrime(int candidate) 函数"></a>IsPrime(int candidate) 函数</h3><p>该函数扩容和初始化字典时都会去调用， 对primes数组里值进行比较（为了让元素分配更分散，这些值或许是微软程序员认为合理的）</p>
+<p>所以桶数组和结构体真正的数组大小是primes 里的值</p>
+<h3 id="Resize-int-newSize-bool-forceNewHashCodes-函数"><a href="#Resize-int-newSize-bool-forceNewHashCodes-函数" class="headerlink" title="Resize(int newSize, bool forceNewHashCodes)函数"></a>Resize(int newSize, bool forceNewHashCodes)函数</h3><p>1第一次调用 对hash桶和链表数组(结构体数组)扩容，其中链表数组使用Array.Copy()进行值拷贝</p>
+<p>而由于hash桶已经改变了长度，所以再次 mod 去计算命中的目标</p>
+<p>2.第二次调用 本次没有去扩容数组。 由于改变了比较器的实现，再次hashcode 进行mod运算得到新的命中下标</p>
+<p>这个方式是不确定的，最坏情况下会发生连续调用</p>
+<h2 id="GetValue"><a href="#GetValue" class="headerlink" title="GetValue"></a>GetValue</h2><h3 id="索引器"><a href="#索引器" class="headerlink" title="索引器"></a>索引器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public TValue this[TKey key] &#123;</span><br><span class="line">           get &#123;</span><br><span class="line">               int i = FindEntry(key);</span><br><span class="line">               if (i &gt;= 0) return entries[i].value;</span><br><span class="line">               ThrowHelper.ThrowKeyNotFoundException();</span><br><span class="line">               return default(TValue);</span><br><span class="line">           &#125;</span><br><span class="line">           set &#123;</span><br><span class="line">               Insert(key, value, false);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="TryGetValue"><a href="#TryGetValue" class="headerlink" title="TryGetValue"></a>TryGetValue</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public bool TryGetValue(TKey key, out TValue value) &#123;</span><br><span class="line">         int i = FindEntry(key);</span><br><span class="line">         if (i &gt;= 0) &#123;</span><br><span class="line">             value = entries[i].value;</span><br><span class="line">             return true;</span><br><span class="line">         &#125;</span><br><span class="line">         value = default(TValue);</span><br><span class="line">         return false;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<pre><code>    private int FindEntry(TKey key) &#123;
+        if( key == null) &#123;
+            ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);
+        &#125;
+ 
+        if (buckets != null) &#123;
+            int hashCode = comparer.GetHashCode(key) &amp; 0x7FFFFFFF;
+            for (int i = buckets[hashCode % buckets.Length]; i &gt;= 0; i = entries[i].next) &#123;
+                if (entries[i].hashCode == hashCode &amp;&amp; comparer.Equals(entries[i].key, key)) return i;
+            &#125;
+        &#125;
+        return -1;
+    &#125;
+</code></pre>
+<p>通过添加得源码，可以看出find操作也很简单，我就不继续啰嗦了</p>
+<p>至于怎么取值看自己情况，一个会抛异常一个不会抛异常</p>
+<p>（循环取值时不要尝试用try{}catch 去抓取索引器取值抛的异常……因为真的会影响性能  这与堆建立的异常跟踪有关）</p>
+<h2 id="Remove"><a href="#Remove" class="headerlink" title="Remove"></a>Remove</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public bool Remove(TKey key) &#123;</span><br><span class="line">            if(key == null) &#123;</span><br><span class="line">                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            if (buckets != null) &#123;</span><br><span class="line">                int hashCode = comparer.GetHashCode(key) &amp; 0x7FFFFFFF;</span><br><span class="line">                int bucket = hashCode % buckets.Length;</span><br><span class="line">                int last = -1;</span><br><span class="line">                for (int i = buckets[bucket]; i &gt;= 0; last = i, i = entries[i].next) &#123;</span><br><span class="line">                    if (entries[i].hashCode == hashCode &amp;&amp; comparer.Equals(entries[i].key, key)) &#123;</span><br><span class="line">                        if (last &lt; 0) &#123;</span><br><span class="line">                            buckets[bucket] = entries[i].next;</span><br><span class="line">                        &#125;</span><br><span class="line">                        else &#123;</span><br><span class="line">                            entries[last].next = entries[i].next;</span><br><span class="line">                        &#125;</span><br><span class="line">                        entries[i].hashCode = -1;</span><br><span class="line">                        entries[i].next = freeList;</span><br><span class="line">                        entries[i].key = default(TKey);</span><br><span class="line">                        entries[i].value = default(TValue);</span><br><span class="line">                        </span><br><span class="line">                        //记录当前被删除得，下一次add会使用</span><br><span class="line">                        freeList = i; </span><br><span class="line">                        freeCount++;</span><br><span class="line">                        version++;</span><br><span class="line">                        return true;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Insert方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">int index;</span><br><span class="line">            if (freeCount &gt; 0) &#123;</span><br><span class="line">                index = freeList;</span><br><span class="line">                freeList = entries[index].next;</span><br><span class="line">                freeCount--;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                if (count == entries.Length)</span><br><span class="line">                &#123;</span><br><span class="line">                    Resize();</span><br><span class="line">                    targetBucket = hashCode % buckets.Length;</span><br><span class="line">                &#125;</span><br><span class="line">                index = count;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            entries[index].hashCode = hashCode;</span><br><span class="line">            entries[index].next = buckets[targetBucket];</span><br><span class="line">            entries[index].key = key;</span><br><span class="line">            entries[index].value = value;</span><br><span class="line">            buckets[targetBucket] = index;</span><br><span class="line">            version++;</span><br></pre></td></tr></table></figure>
+
+<p>同样很简单，没必要啰嗦</p>
+<h2 id="Version"><a href="#Version" class="headerlink" title="Version"></a>Version</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">[Serializable]</span><br><span class="line">       public struct Enumerator: IEnumerator&lt;KeyValuePair&lt;TKey,TValue&gt;&gt;,</span><br><span class="line">           IDictionaryEnumerator</span><br><span class="line">       &#123;</span><br><span class="line">           private Dictionary&lt;TKey,TValue&gt; dictionary;</span><br><span class="line">           private int version;</span><br><span class="line">           private int index;</span><br><span class="line">           private KeyValuePair&lt;TKey,TValue&gt; current;</span><br><span class="line">           private int getEnumeratorRetType;  // What should Enumerator.Current return?</span><br><span class="line">           </span><br><span class="line">           internal const int DictEntry = 1;</span><br><span class="line">           internal const int KeyValuePair = 2;</span><br><span class="line"></span><br><span class="line">           internal Enumerator(Dictionary&lt;TKey,TValue&gt; dictionary, int getEnumeratorRetType) &#123;</span><br><span class="line">               this.dictionary = dictionary;</span><br><span class="line">               version = dictionary.version;</span><br><span class="line">               index = 0;</span><br><span class="line">               this.getEnumeratorRetType = getEnumeratorRetType;</span><br><span class="line">               current = new KeyValuePair&lt;TKey, TValue&gt;();</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           public bool MoveNext() &#123;</span><br><span class="line">               if (version != dictionary.version) &#123;</span><br><span class="line">                   ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_EnumFailedVersion);</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               // Use unsigned comparison since we set index to dictionary.count+1 when the enumeration ends.</span><br><span class="line">               // dictionary.count+1 could be negative if dictionary.count is Int32.MaxValue</span><br><span class="line">               while ((uint)index &lt; (uint)dictionary.count) &#123;</span><br><span class="line">                   if (dictionary.entries[index].hashCode &gt;= 0) &#123;</span><br><span class="line">                       current = new KeyValuePair&lt;TKey, TValue&gt;(dictionary.entries[index].key, dictionary.entries[index].value);</span><br><span class="line">                       index++;</span><br><span class="line">                       return true;</span><br><span class="line">                   &#125;</span><br><span class="line">                   index++;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               index = dictionary.count + 1;</span><br><span class="line">               current = new KeyValuePair&lt;TKey, TValue&gt;();</span><br><span class="line">               return false;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           public KeyValuePair&lt;TKey,TValue&gt; Current &#123;</span><br><span class="line">               get &#123; return current; &#125;</span><br><span class="line">           &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>下面代码会抛出一个 System.InvalidOperationException:“Collection was modified; enumeration operation may not execute.”异常</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Dictionary&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt; dic = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;() &#123; [<span class="number">1</span>]=<span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span>(<span class="keyword">var</span> item <span class="keyword">in</span> dic)</span><br><span class="line">        &#123;</span><br><span class="line">            dic.Add(<span class="number">3</span>, <span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">   </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="IL码"><a href="#IL码" class="headerlink" title="IL码"></a>IL码</h3><p>这是上面代码的IL码，便于下面了解foreach原理</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Token: 0x02000002 RID: 2</span></span><br><span class="line">.class private <span class="keyword">auto</span> ansi beforefieldinit ConsoleApp1.Program</span><br><span class="line">  extends [System.Runtime]System.Object</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// Methods</span></span><br><span class="line">  <span class="comment">// Token: 0x06000001 RID: 1 RVA: 0x00002050 File Offset: 0x00000250</span></span><br><span class="line">  .method private hidebysig <span class="type">static</span> </span><br><span class="line">    <span class="type">void</span> <span class="title function_">Main</span> <span class="params">(</span></span><br><span class="line"><span class="params">      <span class="built_in">string</span>[] **args**</span></span><br><span class="line"><span class="params">    )</span> cil managed </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// Header Size: 12 bytes</span></span><br><span class="line">    <span class="comment">// Code Size: 78 (0x4E) bytes</span></span><br><span class="line">    <span class="comment">// LocalVarSig Token: 0x11000001 RID: 1</span></span><br><span class="line">    .maxstack <span class="number">4</span></span><br><span class="line">    .entrypoint</span><br><span class="line">    .locals <span class="title function_">init</span> <span class="params">(</span></span><br><span class="line"><span class="params">      [<span class="number">0</span>] class [System.Collections]System.Collections.Generic.Dictionary`<span class="number">2</span>&lt;int32, int32&gt; dic,</span></span><br><span class="line"><span class="params">      [<span class="number">1</span>] valuetype [System.Collections]System.Collections.Generic.Dictionary`<span class="number">2</span>/Enumerator&lt;int32, int32&gt;,</span></span><br><span class="line"><span class="params">      [<span class="number">2</span>] valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`<span class="number">2</span>&lt;int32, int32&gt; item</span></span><br><span class="line"><span class="params">    )</span></span><br><span class="line"></span><br><span class="line">​    <span class="comment">/* (10,9)-(10,10) D:\cpp\code\C#\ConsoleApp1\ConsoleApp1\Program.cs */</span></span><br><span class="line">​    <span class="comment">/* 0x0000025C 00      */</span> IL_0000: nop</span><br><span class="line">​    <span class="comment">/* (11,13)-(11,78) D:\cpp\code\C#\ConsoleApp1\ConsoleApp1\Program.cs */</span></span><br><span class="line">​    <span class="comment">/* 0x0000025D 730B00000A  */</span> IL_0001: newobj  instance <span class="type">void</span> class [System.Collections]System.Collections.Generic.Dictionary`2&lt;int32, int32&gt;::.<span class="title function_">ctor</span><span class="params">()</span></span><br><span class="line">​    <span class="comment">/* 0x00000262 25      */</span> IL_0006: dup</span><br><span class="line">​    <span class="comment">/* 0x00000263 17      */</span> IL_0007: ldc.i4.1</span><br><span class="line">​    <span class="comment">/* 0x00000264 17      */</span> IL_0008: ldc.i4.1</span><br><span class="line">​    <span class="comment">/* 0x00000265 6F0C00000A  */</span> IL_0009: callvirt instance <span class="type">void</span> class [System.Collections]System.Collections.Generic.Dictionary`2&lt;int32, int32&gt;::<span class="title function_">set_Item</span><span class="params">(!<span class="number">0</span>, !<span class="number">1</span>)</span></span><br><span class="line">​    <span class="comment">/* 0x0000026A 00      */</span> IL_000E: nop</span><br><span class="line">​    <span class="comment">/* 0x0000026B 0A      */</span> IL_000F: stloc.0</span><br><span class="line">​    <span class="comment">/* (13,13)-(13,20) D:\cpp\code\C#\ConsoleApp1\ConsoleApp1\Program.cs */</span></span><br><span class="line">​    <span class="comment">/* 0x0000026C 00      */</span> IL_0010: nop</span><br><span class="line">​    <span class="comment">/* (13,33)-(13,36) D:\cpp\code\C#\ConsoleApp1\ConsoleApp1\Program.cs */</span></span><br><span class="line">​    <span class="comment">/* 0x0000026D 06      */</span> IL_0011: ldloc.0</span><br><span class="line">​    <span class="comment">/* 0x0000026E 6F0D00000A  */</span> IL_0012: callvirt instance valuetype [System.Collections]System.Collections.Generic.Dictionary`2/Enumerator&lt;!0, !1&gt; class [System.Collections]System.Collections.Generic.Dictionary`2&lt;int32, int32&gt;::<span class="title function_">GetEnumerator</span><span class="params">()</span></span><br><span class="line">​    <span class="comment">/* 0x00000273 0B      */</span> IL_0017: stloc.1</span><br><span class="line">​    .try</span><br><span class="line">​    &#123;</span><br><span class="line">​      <span class="comment">/* (hidden)-(hidden) D:\cpp\code\C#\ConsoleApp1\ConsoleApp1\Program.cs */</span></span><br><span class="line">​      <span class="comment">/* 0x00000274 2B19     */</span> IL_0018: br.s   IL_0033</span><br><span class="line">​      <span class="comment">// loop start (head: IL_0033)</span></span><br><span class="line">​        <span class="comment">/* (13,21)-(13,29) D:\cpp\code\C#\ConsoleApp1\ConsoleApp1\Program.cs */</span></span><br><span class="line">​        <span class="comment">/* 0x00000276 1201     */</span> IL_001A: ldloca.s V_1</span><br><span class="line">​        <span class="comment">/* 0x00000278 280E00000A  */</span> IL_001C: call   instance valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`<span class="number">2</span>&lt;!<span class="number">0</span>, !<span class="number">1</span>&gt; valuetype [System.Collections]System.Collections.Generic.Dictionary`<span class="number">2</span>/Enumerator&lt;int32, int32&gt;::get_Current()</span><br><span class="line">​        <span class="comment">/* 0x0000027D 0C      */</span> IL_0021: stloc<span class="number">.2</span></span><br><span class="line">​        <span class="comment">/* (14,13)-(14,14) D:\cpp\code\C#\ConsoleApp1\ConsoleApp1\Program.cs */</span></span><br><span class="line">​        <span class="comment">/* 0x0000027E 00      */</span> IL_0022: nop</span><br><span class="line">​        <span class="comment">/* (15,17)-(15,40) D:\cpp\code\C#\ConsoleApp1\ConsoleApp1\Program.cs */</span></span><br><span class="line">​        <span class="comment">/* 0x0000027F 06      */</span> IL_0023: ldloc<span class="number">.0</span></span><br><span class="line">​        <span class="comment">/* 0x00000280 19      */</span> IL_0024: ldc.i4<span class="number">.3</span></span><br><span class="line">​        <span class="comment">/* 0x00000281 1202     */</span> IL_0025: ldloca.s item</span><br><span class="line">​        <span class="comment">/* 0x00000283 280F00000A  */</span> IL_0027: call   instance !<span class="number">1</span> valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`<span class="number">2</span>&lt;int32, int32&gt;::get_Value()</span><br><span class="line">​        <span class="comment">/* 0x00000288 6F1000000A  */</span> IL_002C: callvirt instance <span class="type">void</span> <span class="class"><span class="keyword">class</span> [<span class="title">System</span>.<span class="title">Collections</span>]<span class="title">System</span>.<span class="title">Collections</span>.<span class="title">Generic</span>.<span class="title">Dictionary</span>`2&lt;</span>int32, int32&gt;::Add(!<span class="number">0</span>, !<span class="number">1</span>)</span><br><span class="line">​        <span class="comment">/* 0x0000028D 00      */</span> IL_0031: nop</span><br><span class="line">​        <span class="comment">/* (16,13)-(16,14) D:\cpp\code\C#\ConsoleApp1\ConsoleApp1\Program.cs */</span></span><br><span class="line">​        <span class="comment">/* 0x0000028E 00      */</span> IL_0032: nop</span><br><span class="line"></span><br><span class="line">​        <span class="comment">/* (13,30)-(13,32) D:\cpp\code\C#\ConsoleApp1\ConsoleApp1\Program.cs */</span></span><br><span class="line">​        <span class="comment">/* 0x0000028F 1201     */</span> IL_0033: ldloca.s V_1</span><br><span class="line">​        <span class="comment">/* 0x00000291 281100000A  */</span> IL_0035: call   instance <span class="type">bool</span> valuetype [System.Collections]System.Collections.Generic.Dictionary`<span class="number">2</span>/Enumerator&lt;int32, int32&gt;::MoveNext()</span><br><span class="line">​        <span class="comment">/* 0x00000296 2DDE     */</span> IL_003A: brtrue.s IL_001A</span><br><span class="line">​      <span class="comment">// end loop</span></span><br><span class="line"></span><br><span class="line">​      <span class="comment">/* 0x00000298 DE0F     */</span> IL_003C: leave.s  IL_004D</span><br><span class="line">​    &#125; <span class="comment">// end .try</span></span><br><span class="line">​    finally</span><br><span class="line">​    &#123;</span><br><span class="line">​      <span class="comment">/* (hidden)-(hidden) D:\cpp\code\C#\ConsoleApp1\ConsoleApp1\Program.cs */</span></span><br><span class="line">​      <span class="comment">/* 0x0000029A 1201     */</span> IL_003E: ldloca.s V_1</span><br><span class="line">​      <span class="comment">/* 0x0000029C FE160200001B */</span> IL_0040: constrained. valuetype [System.Collections]System.Collections.Generic.Dictionary`<span class="number">2</span>/Enumerator&lt;int32, int32&gt;</span><br><span class="line">​      <span class="comment">/* 0x000002A2 6F1200000A  */</span> IL_0046: callvirt instance <span class="type">void</span> [System.Runtime]System.IDisposable::Dispose()</span><br><span class="line">​      <span class="comment">/* 0x000002A7 00      */</span> IL_004B: nop</span><br><span class="line">​      <span class="comment">/* 0x000002A8 DC      */</span> IL_004C: endfinally</span><br><span class="line">​    &#125; <span class="comment">// end handler</span></span><br><span class="line"></span><br><span class="line">​    <span class="comment">/* (18,9)-(18,10) D:\cpp\code\C#\ConsoleApp1\ConsoleApp1\Program.cs */</span></span><br><span class="line">​    <span class="comment">/* 0x000002A9 2A      */</span> IL_004D: ret</span><br><span class="line">  &#125; <span class="comment">// end of method Program::Main</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Token: 0x06000002 RID: 2 RVA: 0x000020BC File Offset: 0x000002BC</span></span><br><span class="line">  .method public hidebysig specialname rtspecialname </span><br><span class="line">    instance <span class="type">void</span> .ctor () cil managed </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// Header Size: 1 byte</span></span><br><span class="line">    <span class="comment">// Code Size: 8 (0x8) bytes</span></span><br><span class="line">    .maxstack <span class="number">8</span></span><br><span class="line"></span><br><span class="line">​    <span class="comment">/* 0x000002BD 02      */</span> IL_0000: ldarg<span class="number">.0</span></span><br><span class="line">​    <span class="comment">/* 0x000002BE 281300000A  */</span> IL_0001: call   instance <span class="type">void</span> [System.Runtime]System.Object::.ctor()</span><br><span class="line">​    <span class="comment">/* 0x000002C3 00      */</span> IL_0006: nop</span><br><span class="line">​    <span class="comment">/* 0x000002C4 2A      */</span> IL_0007: ret</span><br><span class="line">  &#125; <span class="comment">// end of method Program::.ctor</span></span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// end of class ConsoleApp1.Program</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h3><p>官方是这样描述的</p>
+<p>“如果 <code>foreach</code> 语句应用为 <code>null</code>，则会引发 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/api/system.nullreferenceexception">NullReferenceException</a>。 如果 <code>foreach</code> 语句的源集合为空，则 <code>foreach</code> 语句的正文不会被执行，而是被跳过”</p>
+<p>自己的类怎么去使用foeach遍历，可以查看官方文档<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/api/system.collections.generic.ienumerable-1?view=net-7.0">https://learn.microsoft.com/zh-cn/dotnet/api/system.collections.generic.ienumerable-1?view=net-7.0</a></p>
+<p>首先调用对象的GetEnumerator()函数，这里会执行此构造方法，而这里Enumerator结构体的version被初始化</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">internal</span> <span class="title">Enumerator</span>(<span class="params">Dictionary&lt;TKey,TValue&gt; dictionary, <span class="built_in">int</span> getEnumeratorRetType</span>)</span> &#123;</span><br><span class="line">               <span class="keyword">this</span>.dictionary = dictionary;</span><br><span class="line">               version = dictionary.version;</span><br><span class="line">               index = <span class="number">0</span>;</span><br><span class="line">               <span class="keyword">this</span>.getEnumeratorRetType = getEnumeratorRetType;</span><br><span class="line">               current = <span class="keyword">new</span> KeyValuePair&lt;TKey, TValue&gt;();</span><br><span class="line">           &#125;</span><br></pre></td></tr></table></figure>
+
+<p>每一次循环都会一直调用MoveNext()函数，直到为false</p>
+<p>在其中有这样一行</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (version != dictionary.version) &#123;</span><br><span class="line">                   ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_EnumFailedVersion);</span><br><span class="line">               &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在源码都可以发现删除或者增加都会进行version++，如果在迭代时进行remove，add等操作，这时与迭代前的version值不相同</p>
+<p>会抛出异常。这样设计也是合理得，在迭代时进行添加元素会导致各种各样的问题，在Java遍历集合中就有体现(使用了快照的方式)。</p>
+<p>而.net的做法更加简洁</p>
+<p>补充：</p>
+<p>在高版本中  会有如await foreach 这是常用的异步编程，具体原理比较复杂，都是交给编译器去把异步代码变为普通代码的。</p>
+<p>可以使用反编译工具自行查看。这时候要实现<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/api/system.collections.generic.iasyncenumerable-1">IAsyncEnumerable</a> 接口方法</p>
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2022/12/12/Dictionary%E5%AE%9E%E7%8E%B0/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2022/12/12/Dictionary%E5%AE%9E%E7%8E%B0/";
+            const title         = "「Dictionary实现」";
+            const excerpt       = `目录[TOC]
+[^.netframework 原码地址：https://referencesource.microsoft.com/]: 
+无关第一次写文章，而这篇文章是我边看源码边写得，技术有限会有不对得地方，不过会尽最大能力去写...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/C/" rel="tag">C#</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2022-12-12T14:09:47.525Z" itemprop="dateModified">最后编辑：2022-12-12</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                1
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                0
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                1
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix toc-div-class" >
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E5%85%B3"><span class="toc-text">无关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hash%E7%AE%97%E6%B3%95"><span class="toc-text">Hash算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFhash%E7%AE%97%E6%B3%95"><span class="toc-text">1  什么是hash算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A2%B0%E6%92%9E"><span class="toc-text">2.碰撞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81%E6%96%B9%E5%BC%8F"><span class="toc-text">3.解决冲突方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="toc-text">文件传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#netframework%E4%B8%ADhash%E7%AE%97%E6%B3%95"><span class="toc-text">.netframework中hash算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary%E5%A5%BD%E5%A4%84"><span class="toc-text">Dictionary好处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary%E7%9A%84%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%84"><span class="toc-text">Dictionary的继承结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IDictionary"><span class="toc-text">IDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICollection"><span class="toc-text">ICollection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IEnumerable"><span class="toc-text">IEnumerable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IReadOnlyDictionary"><span class="toc-text">IReadOnlyDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IReadOnlyCollection"><span class="toc-text">IReadOnlyCollection</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Source"><span class="toc-text">Source</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#private-struct"><span class="toc-text">private struct</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#private-variable"><span class="toc-text">private  variable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1Insert"><span class="toc-text">第一次Insert</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="toc-text">操作过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A2%B0%E6%92%9E%E5%A4%84%E7%90%86"><span class="toc-text">碰撞处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resize"><span class="toc-text">Resize</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IsPrime-int-candidate-%E5%87%BD%E6%95%B0"><span class="toc-text">IsPrime(int candidate) 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resize-int-newSize-bool-forceNewHashCodes-%E5%87%BD%E6%95%B0"><span class="toc-text">Resize(int newSize, bool forceNewHashCodes)函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GetValue"><span class="toc-text">GetValue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%99%A8"><span class="toc-text">索引器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TryGetValue"><span class="toc-text">TryGetValue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Remove"><span class="toc-text">Remove</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Version"><span class="toc-text">Version</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8"><span class="toc-text">异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IL%E7%A0%81"><span class="toc-text">IL码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#foreach"><span class="toc-text">foreach</span></a></li></ol></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/C/" style="font-size: 0.6em;">C#</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/12/12/Dictionary%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Dictionary实现</a>
+            
+          
+        
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        <li><a href="mailto:2247717951@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Nlick47"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2022 NickBlog 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by lyanc.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/vendors/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
