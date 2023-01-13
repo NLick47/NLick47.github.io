@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="C#" />
+    <meta name="keywords" content="水文章" />
   
   <meta name="description" content=".netframework中Dictionary源码">
 <meta property="og:type" content="article">
@@ -24,9 +24,9 @@
 <meta property="og:description" content=".netframework中Dictionary源码">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-12-12T13:12:31.000Z">
-<meta property="article:modified_time" content="2022-12-12T14:09:47.525Z">
+<meta property="article:modified_time" content="2023-01-10T23:05:30.462Z">
 <meta property="article:author" content="lyanc">
-<meta property="article:tag" content="C#">
+<meta property="article:tag" content="水文章">
 <meta name="twitter:card" content="summary">
   
   <!-- 站点验证相关 -->
@@ -169,7 +169,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        ~30.59K
+                        ~30.28K
                     
                     字
                 </li>
@@ -180,13 +180,13 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1670854187525"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1673391930462"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E5%85%B3"><span class="toc-number">2.</span> <span class="toc-text">无关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hash%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">Hash算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFhash%E7%AE%97%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">1  什么是hash算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A2%B0%E6%92%9E"><span class="toc-number">3.2.</span> <span class="toc-text">2.碰撞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81%E6%96%B9%E5%BC%8F"><span class="toc-number">3.3.</span> <span class="toc-text">3.解决冲突方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.4.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="toc-number">4.</span> <span class="toc-text">文件传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#netframework%E4%B8%ADhash%E7%AE%97%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">.netframework中hash算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary%E5%A5%BD%E5%A4%84"><span class="toc-number">6.</span> <span class="toc-text">Dictionary好处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary%E7%9A%84%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%84"><span class="toc-number">7.</span> <span class="toc-text">Dictionary的继承结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IDictionary"><span class="toc-number">7.1.</span> <span class="toc-text">IDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICollection"><span class="toc-number">7.2.</span> <span class="toc-text">ICollection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IEnumerable"><span class="toc-number">7.3.</span> <span class="toc-text">IEnumerable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IReadOnlyDictionary"><span class="toc-number">7.4.</span> <span class="toc-text">IReadOnlyDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IReadOnlyCollection"><span class="toc-number">7.5.</span> <span class="toc-text">IReadOnlyCollection</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Source"><span class="toc-number">8.</span> <span class="toc-text">Source</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#private-struct"><span class="toc-number">8.1.</span> <span class="toc-text">private struct</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#private-variable"><span class="toc-number">8.2.</span> <span class="toc-text">private  variable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1Insert"><span class="toc-number">8.3.</span> <span class="toc-text">第一次Insert</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="toc-number">8.3.1.</span> <span class="toc-text">操作过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A2%B0%E6%92%9E%E5%A4%84%E7%90%86"><span class="toc-number">8.3.2.</span> <span class="toc-text">碰撞处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resize"><span class="toc-number">8.4.</span> <span class="toc-text">Resize</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IsPrime-int-candidate-%E5%87%BD%E6%95%B0"><span class="toc-number">8.4.1.</span> <span class="toc-text">IsPrime(int candidate) 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resize-int-newSize-bool-forceNewHashCodes-%E5%87%BD%E6%95%B0"><span class="toc-number">8.4.2.</span> <span class="toc-text">Resize(int newSize, bool forceNewHashCodes)函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GetValue"><span class="toc-number">8.5.</span> <span class="toc-text">GetValue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%99%A8"><span class="toc-number">8.5.1.</span> <span class="toc-text">索引器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TryGetValue"><span class="toc-number">8.5.2.</span> <span class="toc-text">TryGetValue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Remove"><span class="toc-number">8.6.</span> <span class="toc-text">Remove</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Version"><span class="toc-number">8.7.</span> <span class="toc-text">Version</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8"><span class="toc-number">8.7.1.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IL%E7%A0%81"><span class="toc-number">8.7.2.</span> <span class="toc-text">IL码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#foreach"><span class="toc-number">8.7.3.</span> <span class="toc-text">foreach</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E5%85%B3"><span class="toc-number">2.</span> <span class="toc-text">无关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hash%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">Hash算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A6%82%E6%8B%AC"><span class="toc-number">3.1.</span> <span class="toc-text">1  概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A2%B0%E6%92%9E"><span class="toc-number">3.2.</span> <span class="toc-text">2.碰撞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81%E6%96%B9%E5%BC%8F"><span class="toc-number">3.3.</span> <span class="toc-text">3.解决冲突方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.4.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="toc-number">4.1.</span> <span class="toc-text">文件传输</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86"><span class="toc-number">4.2.</span> <span class="toc-text">加密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-number">4.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96"><span class="toc-number">4.4.</span> <span class="toc-text">优化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#netframework"><span class="toc-number">5.</span> <span class="toc-text">.netframework</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary%E5%A5%BD%E5%A4%84"><span class="toc-number">6.</span> <span class="toc-text">Dictionary好处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary%E7%9A%84%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%84"><span class="toc-number">7.</span> <span class="toc-text">Dictionary的继承结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IDictionary"><span class="toc-number">7.1.</span> <span class="toc-text">IDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICollection"><span class="toc-number">7.2.</span> <span class="toc-text">ICollection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IEnumerable"><span class="toc-number">7.3.</span> <span class="toc-text">IEnumerable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IReadOnlyDictionary"><span class="toc-number">7.4.</span> <span class="toc-text">IReadOnlyDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IReadOnlyCollection"><span class="toc-number">7.5.</span> <span class="toc-text">IReadOnlyCollection</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Source"><span class="toc-number">8.</span> <span class="toc-text">Source</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#private-struct"><span class="toc-number">8.1.</span> <span class="toc-text">private struct</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#private-variable"><span class="toc-number">8.2.</span> <span class="toc-text">private  variable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1Insert"><span class="toc-number">8.3.</span> <span class="toc-text">第一次Insert</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="toc-number">8.3.1.</span> <span class="toc-text">操作过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A2%B0%E6%92%9E%E5%A4%84%E7%90%86"><span class="toc-number">8.3.2.</span> <span class="toc-text">碰撞处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resize"><span class="toc-number">8.4.</span> <span class="toc-text">Resize</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IsPrime-int-candidate-%E5%87%BD%E6%95%B0"><span class="toc-number">8.4.1.</span> <span class="toc-text">IsPrime(int candidate) 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resize-int-newSize-bool-forceNewHashCodes-%E5%87%BD%E6%95%B0"><span class="toc-number">8.4.2.</span> <span class="toc-text">Resize(int newSize, bool forceNewHashCodes)函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GetValue"><span class="toc-number">8.5.</span> <span class="toc-text">GetValue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%99%A8"><span class="toc-number">8.5.1.</span> <span class="toc-text">索引器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TryGetValue"><span class="toc-number">8.5.2.</span> <span class="toc-text">TryGetValue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Remove"><span class="toc-number">8.6.</span> <span class="toc-text">Remove</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Version"><span class="toc-number">8.7.</span> <span class="toc-text">Version</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8"><span class="toc-number">8.7.1.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IL%E7%A0%81"><span class="toc-number">8.7.2.</span> <span class="toc-text">IL码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#foreach"><span class="toc-number">8.7.3.</span> <span class="toc-text">foreach</span></a></li></ol></li></ol></li></ol>
                 </div>
             
             <hr />
@@ -194,7 +194,7 @@
 <p>[^.netframework 原码地址：<a target="_blank" rel="noopener" href="https://referencesource.microsoft.com/]">https://referencesource.microsoft.com/]</a>: </p>
 <h1 id="无关"><a href="#无关" class="headerlink" title="无关"></a>无关</h1><p>第一次写文章，而这篇文章是我边看源码边写得，技术有限会有不对得地方，不过会尽最大能力去写。如有问题欢迎讨论</p>
 <p>由这篇文章开启一条成为大佬之路吧，由简到难，先还是从最简单而我又很喜欢的C#开始,ing</p>
-<h1 id="Hash算法"><a href="#Hash算法" class="headerlink" title="Hash算法"></a>Hash算法</h1><h2 id="1-什么是hash算法"><a href="#1-什么是hash算法" class="headerlink" title="1  什么是hash算法"></a>1  什么是hash算法</h2><p>hash算法又称散列算法，目的是把二进制内容计算成有限字符串或数字随机组成的散列值</p>
+<h1 id="Hash算法"><a href="#Hash算法" class="headerlink" title="Hash算法"></a>Hash算法</h1><h2 id="1-概括"><a href="#1-概括" class="headerlink" title="1  概括"></a>1  概括</h2><p>hash算法又称散列算法，目的是把二进制内容计算成有限字符串或数字随机组成的散列值</p>
 <p>特点：</p>
 <p>不同的二进制经过hash算法后的得到得散列值也有概率会相同，概率高低与算法好坏有关（续）</p>
 <p>相同的二进制经过hash算法得到的散列值一定相同</p>
@@ -207,13 +207,13 @@
 <h2 id="3-解决冲突方式"><a href="#3-解决冲突方式" class="headerlink" title="3.解决冲突方式"></a>3.解决冲突方式</h2><p><strong>1. 拉链法：</strong>这种方法的思路是将产生冲突的元素建立一个单链表，并将头指针地址存储至Hash表对应桶的位置。这样定位到Hash表桶的位置后可通过遍历单链表的形式来查找元素。</p>
 <p><strong>2. 再Hash法：</strong>得到hash值后再调用hash函数，直到解决冲突。</p>
 <p>—Dictionary使用得就是拉链法，其它方法自行了解把—</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="文件传输"><a href="#文件传输" class="headerlink" title="文件传输"></a>文件传输</h1><p>如客户端上传了一个文件，对于服务端比较合理得做法就是，查找该文件是否已经保存在硬盘中了，如不存在就进行io写入 这时候就用到了该算法，转换为一定长度得字符或数字，这样文件就具有了可以标识得值，更快去配合sql查找，或在文件传输前使用hash记录下来，传输完成后次hash，去比较两次hash值判，来断传输中是不是文件被篡改过。可以采用MD5或SHA-1去实现，文件使用SHA-1 计算出来得散列值更不容易发生碰撞 </p>
-<p>md5更应该去加密不敏感的信息，可以配合原文+salt，或者进行多次hash提高安全性</p>
-<h1 id="netframework中hash算法"><a href="#netframework中hash算法" class="headerlink" title=".netframework中hash算法"></a>.netframework中hash算法</h1><p>ValueType 类型要做为Dictionary的Key 要去重写GetHashCode()，Equals() </p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="文件传输"><a href="#文件传输" class="headerlink" title="文件传输"></a>文件传输</h2><p>使用SHA-1去比较文件散列值判断服务端是否已存在该文件或者在是否在中途被篡改</p>
+<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><p>如wifi密码，压缩密码等，只存储hash值</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>如unity修改状态机参数使用字符串的hash值</p>
+<h1 id="netframework"><a href="#netframework" class="headerlink" title=".netframework"></a>.netframework</h1><p>ValueType 类型要做为Dictionary的Key 应该要去继承比较器接口重写</p>
+<p>GetHashCode()，Equals() </p>
 <p>对象类型不重写 最后都会调用</p>
-<p> object.InternalGetHashCode(this);来生成，该实现来自外部代码，通常由c++这种</p>
-<p>如何去重写GetHashCode()？个人采用该类的属性，或者字段进行 xor 运算（减低碰撞发生概率，在字典中能快速查找就行)</p>
-<p>为什么还要重写Equals()？使得hash碰撞时需要使用比较器</p>
+<p>object.InternalGetHashCode(this);来生成，该实现来自外部代码</p>
 <h1 id="Dictionary好处"><a href="#Dictionary好处" class="headerlink" title="Dictionary好处"></a>Dictionary好处</h1><p>查找时间复杂度接近于常量级别，相当于直接用数组下标拿出元素</p>
 <p>可以对程序经常用到的数据进行使用，达到高速存取修改的目地</p>
 <p>缺陷</p>
@@ -279,8 +279,7 @@
 <p>第二次调用该函数会去使用另一种比较器，代码段中有微软开发者注释</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashHelpers.IsWellKnownEqualityComparer(comparer)</span><br></pre></td></tr></table></figure>
 
-<h3 id="IsPrime-int-candidate-函数"><a href="#IsPrime-int-candidate-函数" class="headerlink" title="IsPrime(int candidate) 函数"></a>IsPrime(int candidate) 函数</h3><p>该函数扩容和初始化字典时都会去调用， 对primes数组里值进行比较（为了让元素分配更分散，这些值或许是微软程序员认为合理的）</p>
-<p>所以桶数组和结构体真正的数组大小是primes 里的值</p>
+<h3 id="IsPrime-int-candidate-函数"><a href="#IsPrime-int-candidate-函数" class="headerlink" title="IsPrime(int candidate) 函数"></a>IsPrime(int candidate) 函数</h3><p>该函数扩容和初始化字典时都会去调用， 扩容值使用primes 素数数组值。相对于其它自然数，素数更不容易落在一样的桶中</p>
 <h3 id="Resize-int-newSize-bool-forceNewHashCodes-函数"><a href="#Resize-int-newSize-bool-forceNewHashCodes-函数" class="headerlink" title="Resize(int newSize, bool forceNewHashCodes)函数"></a>Resize(int newSize, bool forceNewHashCodes)函数</h3><p>1第一次调用 对hash桶和链表数组(结构体数组)扩容，其中链表数组使用Array.Copy()进行值拷贝</p>
 <p>而由于hash桶已经改变了长度，所以再次 mod 去计算命中的目标</p>
 <p>2.第二次调用 本次没有去扩容数组。 由于改变了比较器的实现，再次hashcode 进行mod运算得到新的命中下标</p>
@@ -309,9 +308,9 @@
         return -1;
     &#125;
 </code></pre>
-<p>通过添加得源码，可以看出find操作也很简单，我就不继续啰嗦了</p>
+<p>理解add逻辑后，find操作不必要继续啰嗦</p>
 <p>至于怎么取值看自己情况，一个会抛异常一个不会抛异常</p>
-<p>（循环取值时不要尝试用try{}catch 去抓取索引器取值抛的异常……因为真的会影响性能  这与堆建立的异常跟踪有关）</p>
+<p>（循环取值时不要尝试用try{}catch 去抓取索引器取值抛的异常……会影响性能  这与堆建立的异常跟踪有关）</p>
 <h2 id="Remove"><a href="#Remove" class="headerlink" title="Remove"></a>Remove</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public bool Remove(TKey key) &#123;</span><br><span class="line">            if(key == null) &#123;</span><br><span class="line">                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            if (buckets != null) &#123;</span><br><span class="line">                int hashCode = comparer.GetHashCode(key) &amp; 0x7FFFFFFF;</span><br><span class="line">                int bucket = hashCode % buckets.Length;</span><br><span class="line">                int last = -1;</span><br><span class="line">                for (int i = buckets[bucket]; i &gt;= 0; last = i, i = entries[i].next) &#123;</span><br><span class="line">                    if (entries[i].hashCode == hashCode &amp;&amp; comparer.Equals(entries[i].key, key)) &#123;</span><br><span class="line">                        if (last &lt; 0) &#123;</span><br><span class="line">                            buckets[bucket] = entries[i].next;</span><br><span class="line">                        &#125;</span><br><span class="line">                        else &#123;</span><br><span class="line">                            entries[last].next = entries[i].next;</span><br><span class="line">                        &#125;</span><br><span class="line">                        entries[i].hashCode = -1;</span><br><span class="line">                        entries[i].next = freeList;</span><br><span class="line">                        entries[i].key = default(TKey);</span><br><span class="line">                        entries[i].value = default(TValue);</span><br><span class="line">                        </span><br><span class="line">                        //记录当前被删除得，下一次add会使用</span><br><span class="line">                        freeList = i; </span><br><span class="line">                        freeCount++;</span><br><span class="line">                        version++;</span><br><span class="line">                        return true;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -438,14 +437,23 @@
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/C/" rel="tag">C#</a>
+                    <a class="tag-none-link" href="/tags/%E6%B0%B4%E6%96%87%E7%AB%A0/" rel="tag">水文章</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2022-12-12T14:09:47.525Z" itemprop="dateModified">最后编辑：2022-12-12</time>
+                    <time datetime="2023-01-10T23:05:30.462Z" itemprop="dateModified">最后编辑：2023-01-11</time>
                 </div>
             </div>
         </footer>
     </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 保护模式" href="/2022/09/12/保护模式/">&lt; 上一篇</a>
+            </div>
+            
+            
+        </nav>
     
     
 </article>
@@ -479,7 +487,7 @@
                 文章
             </span>
             <span class="count">
-                1
+                2
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -495,7 +503,7 @@
                 标签
             </span>
             <span class="count">
-                1
+                2
             </span>
         </a>
     </div>
@@ -511,7 +519,7 @@
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E5%85%B3"><span class="toc-text">无关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hash%E7%AE%97%E6%B3%95"><span class="toc-text">Hash算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFhash%E7%AE%97%E6%B3%95"><span class="toc-text">1  什么是hash算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A2%B0%E6%92%9E"><span class="toc-text">2.碰撞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81%E6%96%B9%E5%BC%8F"><span class="toc-text">3.解决冲突方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="toc-text">文件传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#netframework%E4%B8%ADhash%E7%AE%97%E6%B3%95"><span class="toc-text">.netframework中hash算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary%E5%A5%BD%E5%A4%84"><span class="toc-text">Dictionary好处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary%E7%9A%84%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%84"><span class="toc-text">Dictionary的继承结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IDictionary"><span class="toc-text">IDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICollection"><span class="toc-text">ICollection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IEnumerable"><span class="toc-text">IEnumerable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IReadOnlyDictionary"><span class="toc-text">IReadOnlyDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IReadOnlyCollection"><span class="toc-text">IReadOnlyCollection</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Source"><span class="toc-text">Source</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#private-struct"><span class="toc-text">private struct</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#private-variable"><span class="toc-text">private  variable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1Insert"><span class="toc-text">第一次Insert</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="toc-text">操作过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A2%B0%E6%92%9E%E5%A4%84%E7%90%86"><span class="toc-text">碰撞处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resize"><span class="toc-text">Resize</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IsPrime-int-candidate-%E5%87%BD%E6%95%B0"><span class="toc-text">IsPrime(int candidate) 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resize-int-newSize-bool-forceNewHashCodes-%E5%87%BD%E6%95%B0"><span class="toc-text">Resize(int newSize, bool forceNewHashCodes)函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GetValue"><span class="toc-text">GetValue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%99%A8"><span class="toc-text">索引器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TryGetValue"><span class="toc-text">TryGetValue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Remove"><span class="toc-text">Remove</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Version"><span class="toc-text">Version</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8"><span class="toc-text">异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IL%E7%A0%81"><span class="toc-text">IL码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#foreach"><span class="toc-text">foreach</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E5%85%B3"><span class="toc-text">无关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hash%E7%AE%97%E6%B3%95"><span class="toc-text">Hash算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A6%82%E6%8B%AC"><span class="toc-text">1  概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A2%B0%E6%92%9E"><span class="toc-text">2.碰撞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81%E6%96%B9%E5%BC%8F"><span class="toc-text">3.解决冲突方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-text">应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="toc-text">文件传输</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86"><span class="toc-text">加密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96"><span class="toc-text">优化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#netframework"><span class="toc-text">.netframework</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary%E5%A5%BD%E5%A4%84"><span class="toc-text">Dictionary好处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary%E7%9A%84%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%84"><span class="toc-text">Dictionary的继承结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IDictionary"><span class="toc-text">IDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ICollection"><span class="toc-text">ICollection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IEnumerable"><span class="toc-text">IEnumerable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IReadOnlyDictionary"><span class="toc-text">IReadOnlyDictionary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IReadOnlyCollection"><span class="toc-text">IReadOnlyCollection</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Source"><span class="toc-text">Source</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#private-struct"><span class="toc-text">private struct</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#private-variable"><span class="toc-text">private  variable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1Insert"><span class="toc-text">第一次Insert</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="toc-text">操作过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A2%B0%E6%92%9E%E5%A4%84%E7%90%86"><span class="toc-text">碰撞处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resize"><span class="toc-text">Resize</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IsPrime-int-candidate-%E5%87%BD%E6%95%B0"><span class="toc-text">IsPrime(int candidate) 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resize-int-newSize-bool-forceNewHashCodes-%E5%87%BD%E6%95%B0"><span class="toc-text">Resize(int newSize, bool forceNewHashCodes)函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GetValue"><span class="toc-text">GetValue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%99%A8"><span class="toc-text">索引器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TryGetValue"><span class="toc-text">TryGetValue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Remove"><span class="toc-text">Remove</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Version"><span class="toc-text">Version</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8"><span class="toc-text">异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IL%E7%A0%81"><span class="toc-text">IL码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#foreach"><span class="toc-text">foreach</span></a></li></ol></li></ol></li></ol>
     </div>
 </aside>
                 
@@ -522,7 +530,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/C/" style="font-size: 0.6em;">C#</a>
+        <a href="/tags/OS/" style="font-size: 0.6em;">OS</a> <a href="/tags/%E6%B0%B4%E6%96%87%E7%AB%A0/" style="font-size: 0.6em;">水文章</a>
       </div>
   </aside>
 
@@ -537,6 +545,12 @@
           
           
             <a class="list-group-item" href="/2022/12/12/Dictionary%E5%AE%9E%E7%8E%B0/"><i class="fa  fa-book"></i> Dictionary实现</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/09/12/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/"><i class="fa  fa-book"></i> 保护模式</a>
             
           
         
@@ -569,7 +583,7 @@
                     </ul>
                     <ul class="kratos-copyright">
                         <div>
-                            <li>&copy; 2022 NickBlog 版权所有.</li>
+                            <li>&copy; 2023 NickBlog 版权所有.</li>
                             <li>本站已运行<span id="span_dt">Loading...</span></li>
                         </div>
                         <div>
