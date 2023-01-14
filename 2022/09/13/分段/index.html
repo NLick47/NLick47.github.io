@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   
   
-  <title>保护模式 | NickBlog</title>
+  <title>分段 | NickBlog</title>
   <meta name="author" content="lyanc" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -18,20 +18,20 @@
   
   <meta name="description" content="OS启动及原理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="保护模式">
-<meta property="og:url" content="http://example.com/2022/09/12/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="分段">
+<meta property="og:url" content="http://example.com/2022/09/13/%E5%88%86%E6%AE%B5/index.html">
 <meta property="og:site_name" content="NickBlog">
 <meta property="og:description" content="OS启动及原理">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/scr/UPP_112-1673586609629-1.png">
-<meta property="og:image" content="http://example.com/scr/20230113131934.png">
-<meta property="og:image" content="http://example.com/scr/20230113132901.png">
-<meta property="article:published_time" content="2022-09-12T13:12:31.000Z">
-<meta property="article:modified_time" content="2023-01-13T12:17:51.939Z">
+<meta property="og:image" content="http://example.com/scr/20230114112539.png">
+<meta property="og:image" content="http://example.com/scr/20230114112817.png">
+<meta property="og:image" content="http://example.com/scr/20230114120212.png">
+<meta property="article:published_time" content="2022-09-13T03:12:31.000Z">
+<meta property="article:modified_time" content="2023-01-14T05:16:43.746Z">
 <meta property="article:author" content="lyanc">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/scr/UPP_112-1673586609629-1.png">
+<meta name="twitter:image" content="http://example.com/scr/20230114112539.png">
   
   <!-- 站点验证相关 -->
   
@@ -157,15 +157,15 @@
 
             <article itemscope itemtype="https://schema.org/Article">
     
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/12/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/13/%E5%88%86%E6%AE%B5/">
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center" itemprop="name headline">保护模式</h1>
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">分段</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><time datetime="2022-09-12T13:12:31.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-09-12</time></li>
+                <li><time datetime="2022-09-13T03:12:31.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-09-13</time></li>
                 <li itemprop="author" itemscope itemtype="https://schema.org/Person">
                     <i class="fa fa-user"></i> 作者 <span itemprop="name">lyanc</span>
                 </li>
@@ -173,7 +173,7 @@
                     <i class="fa fa-edit"></i> 
                     
                     
-                        1346
+                        ~3.30K
                     
                     字
                 </li>
@@ -184,70 +184,159 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1673612271939"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1673673403746"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
                 <div class="kratos-post-inner-toc toc-div-class" >
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">保护模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.1.</span> <span class="toc-text">保护模式下的寄存器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%A6%82%E4%BD%95%E4%BF%9D%E6%8A%A4"><span class="toc-number">1.2.</span> <span class="toc-text">保护模式如何保护</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%9C%B0%E5%9B%BE"><span class="toc-number">1.3.</span> <span class="toc-text">内存地图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">进入保护模式</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98"><span class="toc-number">1.</span> <span class="toc-text">保护模式下的内存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E5%AF%BB%E5%9D%80"><span class="toc-number">2.</span> <span class="toc-text">保护模式下的寻址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E6%8F%8F%E8%BF%B0%E8%A1%A8-GDP"><span class="toc-number">3.</span> <span class="toc-text">全局描述表(GDP)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AE%B5%E6%8F%8F%E8%BF%B0%E7%AC%A6-Segment-Descriptor"><span class="toc-number">4.</span> <span class="toc-text">段描述符(Segment Descriptor)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E6%9D%83%E7%BA%A7"><span class="toc-number">5.</span> <span class="toc-text">特权级</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%8D%E8%AE%BA%E5%AF%BB%E5%9D%80%E2%80%94%E2%80%94%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80"><span class="toc-number">6.</span> <span class="toc-text">再论寻址——逻辑地址</span></a></li></ol>
                 </div>
             
             <hr />
             <div itemprop="articleBody"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//</span><br></pre></td></tr></table></figure>
 
-<h1 id="保护模式"><a href="#保护模式" class="headerlink" title="保护模式"></a>保护模式</h1><p>保护模式(Protected Model ，又称PModel),是x86系列cpu的一种运行模式</p>
-<p>事实上，x86系列cpu有五种模式：时模式（16位），保护模式（32位），IA-32e模式（64位）</p>
-<p>SMM（系统管理模式），虚拟8086模式</p>
-<p>在这个保护模式下面，我们可以：</p>
-<p>使用更大的32位寄存器</p>
-<p>使用更多的内存，4gb（如果目标机器安装了足够的Ram的话）</p>
-<p>能够执行c语言编译过来的机器码</p>
-<p>有得必有失：</p>
-<p>不能使用bios提供给我们的例程（各种int中断）</p>
-<p>​	访问磁盘，读取内存大小，从屏幕显示文字，等等需要通过BIOS中断使用的功能</p>
-<p>没有系统调用，没有标准库，没有异常捕获，什么都没有。一切都要自己造轮子</p>
-<p>cpu变得更加脆弱，哪怕一个轻微的bug（比如1&#x2F;0这类运算），都可以直接导致Triple Fault</p>
-<h2 id="保护模式下的寄存器"><a href="#保护模式下的寄存器" class="headerlink" title="保护模式下的寄存器"></a>保护模式下的寄存器</h2><p>实模式下：</p>
-<p>AX BX CX DX SI DI BP SP</p>
-<p>保护模式下</p>
-<p>EAX EBX ECX EDX ESI EDI EBP ESP</p>
-<p>前面都追加了一个“E”作为前缀</p>
-<p>当并不是所有的寄存器！</p>
-<p>段寄存器：CS，ES，DS，SS 依然维持原样，且大小也维持在16位</p>
-<h2 id="保护模式如何保护"><a href="#保护模式如何保护" class="headerlink" title="保护模式如何保护"></a>保护模式如何保护</h2><p>保护模式主要是对内存区域的保护</p>
-<p>​	从而保障了进程（的专属内存空间）之间的安全</p>
-<p>所以为了做到这一点，保护模式允许我们….</p>
-<p>对内存进行分区</p>
-<p>对每个分区进行单独的配置</p>
-<p>​	比如权限，功能，等等其它一堆配置</p>
-<p>换言之，保护模式允许我们自己绘制一幅内存地图-更高的自由度!</p>
-<h2 id="内存地图"><a href="#内存地图" class="headerlink" title="内存地图"></a>内存地图</h2><p>CPU会照着这份内存地图来按照我们的规则去控制内存空间的访问，从而起到保护作用</p>
-<p>​	一般而言，这份地图包括：</p>
-<p>​			内存中已经被划分的区域的位置</p>
-<p>​			每个区域的种类</p>
-<p>​			每个区域的权限</p>
-<p>为了方便CUP管理，我们得需要为每个区域进行登记，比如登记在一个表格里。这样子，</p>
-<p>CPU能够通过查表十分快速了解到，我要管理得这个区域在哪里？这个区域有多大？是干什么？谁可以访问？</p>
-<p>用计算机的话来讲….</p>
-<p>​	这些区域我们叫做段（Segment）</p>
-<p>​	用来做登记的表格叫做全局描述表（Gobal Descriptor Table,GDT）</p>
-<p>​	每一条登记叫做段描述符（Segment Descriptor ，SD）</p>
-<p>进入保护模式</p>
-<p><img src="/../scr/UPP_112-1673586609629-1.png"></p>
-<p>这是一幅关于各个CPU模式之间的状态转移图。包括了我们之前提到的五大模式</p>
-<p>在这里我们重点关注实地址模式（Real-Address Model）到保护模式（Protected Model）的转换</p>
-<p>我们发现，只需要简单的将CR0寄存器中的PE标志位拉高，便可以进去保护模式</p>
-<p><img src="/../scr/20230113131934.png"></p>
-<p>从图中可以看出来，PE在第一位。所以我们只需要将CR0的东西和0x00000001进行与运算，然后把结果写回CR0.（是的，CR0是可以被我们用MOV指令操作的！）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov eax,cr0</span><br><span class="line">or eax,1</span><br><span class="line">mov cr0,eax</span><br></pre></td></tr></table></figure>
+<h1 id="保护模式下的内存"><a href="#保护模式下的内存" class="headerlink" title="保护模式下的内存"></a>保护模式下的内存</h1><p>32位模式下面内存被分为一个个段（Segment）</p>
+<p> 每个段之间互不干涉，彼此不可见，或许有着不同的权限</p>
+<p>段是最小管理单位（如果我们没有开启分页机制的话）</p>
+<p>我们可以把段想象成一个具有特定职能的区域，存放着特定职能的数据。</p>
+<p>（当然，这个职能是我们开发者自己决定的）</p>
+<p>段是离散的对象，也就是说，没必要非得一个紧挨着一个</p>
+<h1 id="保护模式下的寻址"><a href="#保护模式下的寻址" class="headerlink" title="保护模式下的寻址"></a>保护模式下的寻址</h1><p>我们如何找到一个段？</p>
+<p>一个段的起始位置由基地址（Base Address）确定。大小界限（Limit）决定。</p>
+<p>所以，通过段基地址+段内偏移，我们可以计算出段内任何一个数据的线性地址</p>
+<p>和16位的寻址：段地址 * 16  + 偏移地址的区别？</p>
+<p>​	保护模式下的段允许我们自定义段的位置和长度</p>
+<p>​	因为我们可以使用更大的寄存器，没有必要在使用 *16 来进行左移四位来争取更大的寻址空间</p>
+<p>所以，保护模式下的段基地址 + 段内偏移 的取值可以说是更加自由</p>
+<h1 id="全局描述表-GDP"><a href="#全局描述表-GDP" class="headerlink" title="全局描述表(GDP)"></a>全局描述表(GDP)</h1><p>​	全局秒描述表是一块内存空间，最大64kb</p>
+<p>​	可以理解为一个数据	，里面的每个元素是段描述符</p>
+<p>​	全局描述符的地址指针会被存放在一个特俗的寄存器里——GDTR</p>
+<p>​	GDTR是一个48位大小的寄存器。这里因为全局描述符的地址指针大小也是48位</p>
+<p>​	全局</p>
+<h1 id="段描述符-Segment-Descriptor"><a href="#段描述符-Segment-Descriptor" class="headerlink" title="段描述符(Segment Descriptor)"></a>段描述符(Segment Descriptor)</h1><p>​	段描述符描述了这个段的特征</p>
+<p>​	每个段描述符为8个字节，即两个DWORD</p>
+<table>
+<thead>
+<tr>
+<th>BYTE</th>
+<th>字节</th>
+<th>8位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>WORD</td>
+<td>字</td>
+<td>2BYTEs,16位</td>
+</tr>
+<tr>
+<td>DWORD</td>
+<td>双字</td>
+<td>2WORDs,4 BYTEs ,32位</td>
+</tr>
+<tr>
+<td>QWORD</td>
+<td>四字</td>
+<td>2DWORDs,8BYTEs 64位</td>
+</tr>
+</tbody></table>
+<p>*字的大小与架构有关，这里只针对x86的情况</p>
+<p><img src="/../scr/20230114112539.png"></p>
+<p>低32位</p>
+<p>​	第0~15位（16位）:段大小，或者叫段边界（LImit）</p>
+<p>​	第16~31位(16位): 段基地址（线性地址）(Base)</p>
+<p><img src="/../scr/20230114112817.png"></p>
+<p>​	第0<del>7位 ：段基地址的第15</del>23位</p>
+<p>​	第24<del>31位 ：段基地址的第24</del>31位</p>
+<p>​	第16<del>19位：段大小的第16</del>19位</p>
+<p>​	第23位：G，粒度（Granularity）,表明了段大小的单位</p>
+<p>​				G &#x3D; 0：单位位一字节，段大小最大可以位1MB</p>
+<p>​				G &#x3D; 1：单位为4kb，段大小最大可以为4GB</p>
+<p>第12位：S，段的职能（段的类型）</p>
+<p>​				S&#x3D;0：这个段是一个系统段（暂时用不到）</p>
+<p>​				S&#x3D;1：这个段是一个代码或数据段</p>
+<p>第15位：P,指示段是否在内存中，这个涉及到虚拟内存</p>
+<p>​				P &#x3D; 0 ：这个段目前在内存中</p>
+<p>​				P &#x3D; 1：这个段不在内存中</p>
+<p>第 13~14位（2位）:DPL位，指示了段的权限级别</p>
+<p>​				DPL&#x3D;00 :Ring 0 级别，最高权限</p>
+<p>​				DPL &#x3D;01: RIng 1级别</p>
+<p>​				DPL &#x3D;10: Ring2级别</p>
+<p>​				DPL&#x3D;11 ：Ring3级别，最低级别</p>
+<p>处理器会根据这个数值来控制段的访问(从高DPL访问低DPL的段将会被阻止，除非一些特俗情况)</p>
+<p>第21位：L,表明这个段是否包含了64位的代码</p>
+<p>​				L &#x3D; 0:包含</p>
+<p>​				L&#x3D;1:未包含</p>
+<p>由于我们目前主要是针对的是32位操作系统，所以一般的令L&#x3D;0</p>
+<p>第20位: AVL，软件保留位。没什么特别的，你可以往这里面随便填数字</p>
+<p>第22位：D&#x2F;B，默认操作数大小，默认栈指针大小或者默认上部边界</p>
+<p>关于这一个标志位主要是用于向下兼容16位程序的，这允许16位程序可以在32位的处理器上允许</p>
+<p>第 8~11位(4位)：Type，描述符的类型（子类型）</p>
+<p>​		Type的这四位分别是：X,E,W,A 或者X,C,R,A</p>
+<p>​					X &#x3D; 0,该段是数据段，此时：</p>
+<p>​							E:扩展方向(Expansion-direction),用于栈段（也算是一种数据段）</p>
+<p>​									E&#x3D;0，向上扩展</p>
+<p>​									E&#x3D;1,  向下扩展</p>
+<p>​							W：该段是否可写？（Write-enable）</p>
+<p>​									W&#x3D;0:只读</p>
+<p>​									W&#x3D;1：读+写</p>
+<p>​					X&#x3D;1:该段是代码段，此时</p>
+<p>​							C&#x3D;0:只允许被处在相同特权级的段里代码调用</p>
+<p>​							C&#x3D;1：允许低特权级的段调用，调用时，调用者的CPL不变</p>
+<p>​					R:是否可读（Read-enable）</p>
+<p>​					A:是否被访问（Accessed）</p>
+<p>​							这个是由CPU动态设置的，每当这个段被访问后，这个位就会被拉高(A&#x3D;1)</p>
+<h1 id="特权级"><a href="#特权级" class="headerlink" title="特权级"></a>特权级</h1><p>特权级有:0,1,2,3 这几个等级</p>
+<p><img src="/../scr/20230114120212.png"></p>
+<p>我们使用同心圆去理解</p>
+<p>​	0级，最中心的圆，所以权限最高</p>
+<p>​	往外特权级依次递增，权限递减</p>
+<p>用户程序在3级，我们的内核允许在0级。中间的等级则留给其它驱动程序或者一些服务</p>
+<p>CPU如何追踪程序的特权级？</p>
+<p>CPL（Current Privilege Level）:当前特权级，记录了当前正在执行的程序的特权级</p>
+<p>注意：CPL 不总是等于DPL</p>
+<h1 id="再论寻址——逻辑地址"><a href="#再论寻址——逻辑地址" class="headerlink" title="再论寻址——逻辑地址"></a>再论寻址——逻辑地址</h1><p>段基地址+段内偏移 可以表示某个段内任意一个字节的线性地址</p>
+<p>段的基地址得要通过查询GDT才能知道，我们需要另一种表诉方式！</p>
+<p>保护模式下的逻辑地址：</p>
+<p>逻辑地址是一个长度为48位的数字，由一个16位的段选择器，Segment Selector ,以及32位段内偏移组成</p>
+<p>注意,段选择器并不是GDT内的偏移！</p>
+<p>段选择器 16位</p>
+<p>0~15</p>
+<p>3~15位，index：段的索引，第几个SD（就像是操作数组一样）</p>
+<p>​	范围：0~8191，代表着GDT中8192个SD </p>
+<p>0~1位，RPL：请求权限级。段选择器的权限（一般是构建此选择器的程序的权限）</p>
+<p>注意：GDT的第一个SD（索引&#x3D;0），是一个空SD，（所有的位都是0）.如果使用这个SD就行寻址的话，</p>
+<p>CPU会产生一个GP（General Protection ）异常，这会直接导致Triple Fault!</p>
+<p>2位，TI:表指示器（Table Indicator）</p>
+<p>​		TI &#x3D; 0 : 这个段描述符在GDT里</p>
+<p>​		TI&#x3D;1：这个段描述符在LDT里</p>
+<p>0~1位，RPL：请求权限级，段选择器的权限（一般是构建此选择器的程序权限）</p>
+<p>​	RPL &#x3D; 00：Ring0</p>
+<p>​	RPL&#x3D;01：Ring1</p>
+<p>​	RPL&#x3D;10: RIng2</p>
+<pre><code> RPL=11 :Ring3
+</code></pre>
+<p>段内偏移地址 32位 </p>
+<p>寻址流程（伪代码）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">GetLinearAddr(logic_addr):</span><br><span class="line">	selector,offset  = logic_addr	</span><br><span class="line">	index,ti,rpl = selector	</span><br><span class="line">	table = []</span><br><span class="line">	if ti is set:</span><br><span class="line">		table = ldt</span><br><span class="line">	else:</span><br><span class="line">	 	table = gdt</span><br><span class="line">	 sd = table[index * 8]</span><br><span class="line">	 </span><br><span class="line">	 if sd==null or not 使用rpl去判断是否有权限可以读取SD</span><br><span class="line">	 throw GP</span><br><span class="line">	 </span><br><span class="line">	 return sd.base+offset</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
-<h1 id="进入保护模式"><a href="#进入保护模式" class="headerlink" title="进入保护模式"></a>进入保护模式</h1><p>事实上，Intel给出了十分详细的步骤</p>
-<p><img src="/../scr/20230113132901.png"></p>
-<p>注意！在第4步，前面使用了Immediately,这就意味着MOV CR0和第四步的语句之间不能有任何的其它语句！</p>
-<p>（事实上，在intel提供的手册中明确告诉我们，否则会出现一些随机错误）</p>
+<p>四个在32位模式下依然是16位的寄存器</p>
+<p>CS,ES,SS,DS</p>
+<p>不是设计失误！</p>
+<p>实模式寻址下他们存放的是段地址。</p>
+<p>保护模式寻址下他们存放的是段选择器</p>
+<p>实模式下：</p>
+<p>​	段地址：偏移地址</p>
+<p>保护模式下：</p>
+<p>​	段选择器：偏移地址</p>
+<p>保护模式还免费赠送了两个段寄存器</p>
+<p>FS，GS</p>
+<p>注意：cs和ss，建议指向正确类型的段！</p>
+<p>注意：其它四个随便安排</p>
+<p>提示：</p>
+<p>由于x86架构采用段描述符缓存的技术。为了获得更好的性能，这边建议在编写代码时，尽量把常用的段选择器放在这6个寄存器中</p>
 </div>
         </div>
         
@@ -301,7 +390,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://example.com/2022/09/12/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/",
+                text: "http://example.com/2022/09/13/%E5%88%86%E6%AE%B5/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -313,13 +402,14 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://example.com/2022/09/12/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/";
-            const title         = "「保护模式」";
+            const hostUrl       = "http://example.com/2022/09/13/%E5%88%86%E6%AE%B5/";
+            const title         = "「分段」";
             const excerpt       = `1//
 
-保护模式保护模式(Protected Model ，又称PModel),是x86系列cpu的一种运行模式
-事实上，x86系列cpu有五种模式：时模式（16位），保护模式（32位），IA-32e模式（64位）
-SMM（系统管理...`;
+保护模式下的内存32位模式下面内存被分为一个个段（Segment）
+ 每个段之间互不干涉，彼此不可见，或许有着不同的权限
+段是最小管理单位（如果我们没有开启分页机制的话）
+我们可以把段想象成一个具有特定职能的区域，存放着特定...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -341,7 +431,7 @@ SMM（系统管理...`;
                     <a class="tag-none-link" href="/tags/OS/" rel="tag">OS</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-01-13T12:17:51.939Z" itemprop="dateModified">最后编辑：2023-01-13</time>
+                    <time datetime="2023-01-14T05:16:43.746Z" itemprop="dateModified">最后编辑：2023-01-14</time>
                 </div>
             </div>
         </footer>
@@ -349,9 +439,13 @@ SMM（系统管理...`;
     
         <nav class="navigation post-navigation clearfix" role="navigation">
             
+            <div class="nav-previous clearfix">
+                <a title=" 保护模式" href="/2022/09/12/保护模式/">&lt; 上一篇</a>
+            </div>
+            
             
             <div class="nav-next clearfix">
-                <a title=" 分段" href="/2022/09/13/分段/">下一篇 &gt;</a>
+                <a title=" Dictionary实现" href="/2022/12/12/Dictionary实现/">下一篇 &gt;</a>
             </div>
             
         </nav>
@@ -420,7 +514,7 @@ SMM（系统管理...`;
         <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
     </h4>
     <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F"><span class="toc-text">保护模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-text">保护模式下的寄存器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E5%A6%82%E4%BD%95%E4%BF%9D%E6%8A%A4"><span class="toc-text">保护模式如何保护</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%9C%B0%E5%9B%BE"><span class="toc-text">内存地图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F"><span class="toc-text">进入保护模式</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98"><span class="toc-text">保护模式下的内存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E5%AF%BB%E5%9D%80"><span class="toc-text">保护模式下的寻址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E6%8F%8F%E8%BF%B0%E8%A1%A8-GDP"><span class="toc-text">全局描述表(GDP)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AE%B5%E6%8F%8F%E8%BF%B0%E7%AC%A6-Segment-Descriptor"><span class="toc-text">段描述符(Segment Descriptor)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E6%9D%83%E7%BA%A7"><span class="toc-text">特权级</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%8D%E8%AE%BA%E5%AF%BB%E5%9D%80%E2%80%94%E2%80%94%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80"><span class="toc-text">再论寻址——逻辑地址</span></a></li></ol>
     </div>
 </aside>
                 
